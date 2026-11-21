@@ -1,0 +1,23 @@
+{
+  "name": "studytrack",
+  "version": "0.1.0",
+  "private": true,
+  "description": "StudyTrack — AKTU student SGPA predictor powered by PYQ analysis and AI coaching",
+  "scripts": {
+    "dev": "pnpm --filter @studytrack/web dev",
+    "dev:ext": "pnpm --filter @studytrack/extension dev",
+    "build": "pnpm -r build",
+    "build:web": "pnpm --filter @studytrack/web build",
+    "build:ext": "pnpm --filter @studytrack/extension build",
+    "test": "pnpm --filter @studytrack/engine test",
+    "test:all": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
+    "eval:prompts": "node scripts/eval-prompts.mjs"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
