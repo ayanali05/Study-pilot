@@ -1,6 +1,7 @@
 {
   "name": "studypilot-root",
   "private": true,
+  "packageManager": "pnpm@9.15.4",
   "scripts": {
     "build": "pnpm --prefix studytrack --filter @studytrack/web build"
   }
