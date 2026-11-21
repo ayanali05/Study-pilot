@@ -3,7 +3,7 @@
 // "Study this next to raise your SGPA the most."
 
 import type { Subject, SubjectProgress, Topic } from '@studytrack/data';
-import type { TopicPriorityResult } from './pyq-analyzer.js';
+import type { TopicPriorityResult } from './pyq-analyzer';
 import type { TestResult } from '@studytrack/data';
 
 export interface StudyRecommendation {

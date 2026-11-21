@@ -1,8 +1,8 @@
 // ─── @studytrack/data barrel export ───
-export * from './schemas.js';
-export * from './config.js';
-export { syllabusData } from './seed/syllabus.js';
-export { pyqDataSets } from './seed/pyq-data.js';
+export * from './schemas';
+export * from './config';
+export { syllabusData } from './seed/syllabus';
+export { pyqDataSets } from './seed/pyq-data';
 export {
   demoProgress,
   demoSessions,
@@ -10,5 +10,5 @@ export {
   demoUserStats,
   demoFlashcards,
   demoBookmarks,
-} from './seed/demo-progress.js';
-export { createDataService, getDataService, type DataService } from './data-service.js';
+} from './seed/demo-progress';
+export { createDataService, getDataService, type DataService } from './data-service';

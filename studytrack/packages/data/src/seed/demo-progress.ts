@@ -2,7 +2,7 @@
 // Pre-seeded ~4 weeks of realistic study progress for the demo user.
 // Roughly 60% of topics covered, with varying confidence levels.
 
-import type { SubjectProgress, StudySession, TestResult, UserStats, Flashcard, Bookmark } from '../schemas.js';
+import type { SubjectProgress, StudySession, TestResult, UserStats, Flashcard, Bookmark } from '../schemas';
 
 // ─── Subject Progress ───
 export const demoProgress: SubjectProgress[] = [

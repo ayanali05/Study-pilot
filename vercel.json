@@ -1,0 +1,6 @@
+{
+  "framework": "nextjs",
+  "installCommand": "pnpm --prefix studytrack install",
+  "buildCommand": "pnpm --prefix studytrack --filter @studytrack/web build",
+  "outputDirectory": "studytrack/apps/web/.next"
+}

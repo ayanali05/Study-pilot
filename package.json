@@ -1,0 +1,7 @@
+{
+  "name": "studypilot-root",
+  "private": true,
+  "scripts": {
+    "build": "pnpm --prefix studytrack --filter @studytrack/web build"
+  }
+}

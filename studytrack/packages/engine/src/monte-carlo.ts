@@ -3,8 +3,8 @@
 // an SGPA distribution: histogram, median, percentiles, and
 // "probability of reaching your target SGPA".
 
-import type { SubjectPrediction, SGPAPrediction } from './sgpa-predictor.js';
-import { lookupGrade, calculateSGPA } from './grade-utils.js';
+import type { SubjectPrediction, SGPAPrediction } from './sgpa-predictor';
+import { lookupGrade, calculateSGPA } from './grade-utils';
 
 export interface MonteCarloResult {
   /** Number of simulation runs */

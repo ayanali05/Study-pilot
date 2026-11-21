@@ -6,14 +6,14 @@
 import type {
   Syllabus, SubjectProgress, StudySession, TestResult,
   UserStats, Flashcard, Bookmark, PYQData,
-} from './schemas.js';
-import { featureFlags, DEMO_USER } from './config.js';
-import { syllabusData } from './seed/syllabus.js';
-import { pyqDataSets } from './seed/pyq-data.js';
+} from './schemas';
+import { featureFlags, DEMO_USER } from './config';
+import { syllabusData } from './seed/syllabus';
+import { pyqDataSets } from './seed/pyq-data';
 import {
   demoProgress, demoSessions, demoTestResults,
   demoUserStats, demoFlashcards, demoBookmarks,
-} from './seed/demo-progress.js';
+} from './seed/demo-progress';
 
 // ─── Types ───
 export interface DataService {

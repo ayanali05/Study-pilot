@@ -2,7 +2,7 @@
 // SAMPLE DATASET — not official AKTU data.
 // Structure is realistic: 5 years of questions per subject, with topic mapping.
 
-import type { PYQData } from '../schemas.js';
+import type { PYQData } from '../schemas';
 
 export const pyqDataSets: PYQData[] = [
   // ── Data Structures PYQs ──

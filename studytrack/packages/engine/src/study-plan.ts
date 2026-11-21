@@ -3,7 +3,7 @@
 // and topic priorities. Critical topics first, then Important, then Optional.
 
 import type { Subject, SubjectProgress, Topic } from '@studytrack/data';
-import type { TopicPriorityResult } from './pyq-analyzer.js';
+import type { TopicPriorityResult } from './pyq-analyzer';
 
 export interface PlanTopic {
   topicId: string;

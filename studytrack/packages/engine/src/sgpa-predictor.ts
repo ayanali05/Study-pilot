@@ -4,8 +4,8 @@
 
 import type { Subject, SubjectProgress, TestResult } from '@studytrack/data';
 import { PREDICTOR_WEIGHTS, EXAM_STRUCTURE } from '@studytrack/data/config';
-import { lookupGrade, calculateSGPA } from './grade-utils.js';
-import type { TopicPriorityResult } from './pyq-analyzer.js';
+import { lookupGrade, calculateSGPA } from './grade-utils';
+import type { TopicPriorityResult } from './pyq-analyzer';
 
 export interface SubjectPrediction {
   subjectId: string;

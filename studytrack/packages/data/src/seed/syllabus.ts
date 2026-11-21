@@ -2,7 +2,7 @@
 // CLEARLY LABELLED: This is a SAMPLE DATASET for demonstration.
 // It is NOT official AKTU data. Structure matches real AKTU syllabi for realism.
 
-import type { Syllabus } from '../schemas.js';
+import type { Syllabus } from '../schemas';
 
 export const syllabusData: Syllabus = {
   university: 'AKTU',

@@ -26,5 +26,6 @@ desktop.ini
 # Build & Archives
 dist/
 build/
+.next/
 *.zip
 !website/downloads/*.zip
