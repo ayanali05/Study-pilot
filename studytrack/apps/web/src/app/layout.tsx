@@ -21,20 +21,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex min-h-screen">
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body className="antialiased bg-[#030712] text-slate-100 flex min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
+        {/* Animated Floating Cosmic Aurora Orbs */}
+        <div className="aurora-bg" aria-hidden="true">
+          <div className="aurora-blob-1" />
+          <div className="aurora-blob-2" />
+          <div className="aurora-blob-3" />
+        </div>
+
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <I18nProvider>
             <StoreProvider>
-              {/* Desktop Sidebar */}
-              <Sidebar />
+              <div className="flex w-full min-h-screen relative z-10">
+                {/* Desktop Floating Glass Sidebar */}
+                <Sidebar />
 
-              {/* Main App Content Area */}
-              <div className="flex-1 flex flex-col min-w-0">
-                <TopNav />
-                <main className="flex-1 p-6 max-w-7xl w-full mx-auto space-y-6">
-                  {children}
-                </main>
+                {/* Main App Content Area */}
+                <div className="flex-1 flex flex-col min-w-0 pb-16 lg:pb-0">
+                  <TopNav />
+                  <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
+                    {children}
+                  </main>
+                </div>
               </div>
 
               {/* Modals & Overlays */}

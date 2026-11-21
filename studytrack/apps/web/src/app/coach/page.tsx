@@ -142,54 +142,54 @@ export default function CoachPage() {
         </div>
       </div>
 
-      {/* Suggested Quick Prompts */}
-      <div className="flex flex-wrap gap-2">
+      {/* 3D Floating Suggested Quick Prompts */}
+      <div className="floating-tab-container flex flex-wrap gap-2.5">
         <button
           onClick={() => sendMessage('Give me a 3-day exam crash plan covering maximum AKTU marks')}
-          className="px-3 py-1.5 text-xs rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 flex items-center gap-1.5 transition-colors"
+          className="floating-pill px-3.5 py-2 text-xs rounded-2xl text-indigo-300 border-indigo-500/30 hover:text-white flex items-center gap-2 transition-all"
         >
-          <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+          <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
           <span>3-Day High-Yield Crash Plan</span>
         </button>
         <button
           onClick={() => sendMessage('Explain Binary Search Tree (BST) exam concepts and PYQ frequency')}
-          className="px-3 py-1.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1.5 transition-colors"
+          className="floating-pill px-3.5 py-2 text-xs rounded-2xl text-slate-300 border-white/10 hover:text-white flex items-center gap-2 transition-all"
         >
-          <BookOpen className="w-3.5 h-3.5 text-slate-500" />
+          <BookOpen className="w-3.5 h-3.5 text-slate-400" />
           <span>Explain BST (5/5 Years in PYQ)</span>
         </button>
         <button
           onClick={() => sendMessage('Why are topics labeled Critical vs Optional?')}
-          className="px-3 py-1.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1.5 transition-colors"
+          className="floating-pill px-3.5 py-2 text-xs rounded-2xl text-amber-300 border-amber-500/30 hover:text-white flex items-center gap-2 transition-all"
         >
-          <Zap className="w-3.5 h-3.5 text-amber-500" />
+          <Zap className="w-3.5 h-3.5 text-amber-400" />
           <span>Why is a Topic Critical?</span>
         </button>
       </div>
 
-      {/* Chat Messages Log */}
-      <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 min-h-[380px] max-h-[500px] overflow-y-auto">
+      {/* Chat Messages Log with Deep Glass Panel */}
+      <div className="p-6 rounded-3xl glass-panel border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)] space-y-4 min-h-[380px] max-h-[500px] overflow-y-auto">
         {messages.map((m) => (
           <div
             key={m.id}
             className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}`}
           >
             <div
-              className={`p-4 rounded-2xl max-w-xl text-xs leading-relaxed space-y-2 ${
+              className={`p-4 rounded-3xl max-w-xl text-xs leading-relaxed space-y-2.5 ${
                 m.role === 'user'
-                  ? 'bg-indigo-600 text-white rounded-br-none'
-                  : 'bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 rounded-bl-none border border-slate-200 dark:border-slate-700'
+                  ? 'floating-tab-active text-white rounded-br-none shadow-lg'
+                  : 'glass-panel border-white/10 text-slate-200 rounded-bl-none'
               }`}
             >
               <div className="whitespace-pre-line">{m.content}</div>
 
               {m.citations && m.citations.length > 0 && (
-                <div className="pt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex flex-wrap gap-1.5 items-center">
+                <div className="pt-2 border-t border-white/10 flex flex-wrap gap-1.5 items-center">
                   <span className="text-[10px] text-slate-400">Sources:</span>
                   {m.citations.map((c, i) => (
                     <span
                       key={i}
-                      className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 font-mono font-medium"
+                      className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-mono font-bold"
                     >
                       {c.label}
                     </span>
@@ -206,7 +206,7 @@ export default function CoachPage() {
         ))}
 
         {loading && (
-          <div className="flex items-center gap-2 p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/60 text-xs text-slate-500 w-fit">
+          <div className="flex items-center gap-2 p-3.5 rounded-2xl glass-panel border-white/10 text-xs text-slate-300 w-fit">
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" />
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce [animation-delay:0.2s]" />
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce [animation-delay:0.4s]" />
@@ -215,25 +215,25 @@ export default function CoachPage() {
         )}
       </div>
 
-      {/* Input Field */}
+      {/* Input Field with 3D Glass Pill */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
           sendMessage(input);
         }}
-        className="flex items-center gap-2"
+        className="flex items-center gap-2.5"
       >
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask anything about AKTU syllabus, BST, 3-day plans, or exam patterns..."
-          className="flex-1 px-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm"
+          className="flex-1 px-5 py-3.5 rounded-3xl glass-panel border border-white/15 text-xs text-white focus:outline-none focus:border-indigo-400 shadow-inner"
         />
         <button
           type="submit"
           disabled={!input.trim() || loading}
-          className="p-3 rounded-2xl bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-40 transition-colors shadow-md shadow-indigo-500/20"
+          className="floating-tab-active p-3.5 rounded-3xl text-white hover:brightness-110 disabled:opacity-40 transition-all shadow-md shrink-0"
         >
           <Send className="w-4 h-4" />
         </button>

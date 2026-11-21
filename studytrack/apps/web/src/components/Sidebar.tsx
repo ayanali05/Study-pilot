@@ -52,16 +52,16 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Desktop Glass Sidebar */}
-      <aside className="hidden lg:flex w-64 shrink-0 glass-panel border-r border-white/10 flex-col min-h-screen sticky top-0 h-screen overflow-y-auto z-40">
+      {/* Desktop Floating Glass Monolith Sidebar */}
+      <aside className="hidden lg:flex w-64 shrink-0 glass-panel rounded-3xl my-3 ml-3 border border-white/15 flex-col sticky top-3 h-[calc(100vh-1.5rem)] overflow-hidden z-40 shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-3xl">
         {/* Brand */}
-        <div className="h-16 px-5 flex items-center gap-3 border-b border-white/10 shrink-0">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-purple-600 flex items-center justify-center text-white font-black shadow-lg shadow-indigo-500/30">
+        <div className="h-16 px-5 flex items-center gap-3 border-b border-white/10 shrink-0 bg-white/[0.02]">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 via-indigo-600 to-purple-600 flex items-center justify-center text-white font-black shadow-lg shadow-indigo-500/40 border border-white/20">
             ST
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-base tracking-tight text-white">
+              <span className="font-extrabold text-base tracking-tight text-white drop-shadow-sm">
                 StudyTrack
               </span>
               <span className="text-[10px] font-black px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
@@ -75,7 +75,7 @@ export function Sidebar() {
         </div>
 
         {/* Navigation items with 3D Floating Tab Depth */}
-        <nav className="flex-1 p-3 space-y-1.5 overflow-y-auto">
+        <nav className="flex-1 p-3 space-y-1.5 overflow-y-auto floating-tab-container">
           <div className="px-3 py-1 text-[10px] font-bold tracking-wider text-slate-400 uppercase">
             Hero Engines
           </div>
@@ -86,14 +86,14 @@ export function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`floating-tab flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                className={`floating-tab flex items-center justify-between px-3 py-2.5 rounded-2xl text-xs font-bold transition-all ${
                   active
-                    ? 'floating-tab-active bg-indigo-600 text-white shadow-lg shadow-indigo-600/40 border border-indigo-400/50'
-                    : 'text-slate-300 hover:text-white hover:bg-white/5 border border-transparent'
+                    ? 'floating-tab-active text-white'
+                    : 'text-slate-300 hover:text-white hover:bg-white/10 border border-transparent'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
-                  <Icon className={`w-4 h-4 ${active ? 'text-white' : 'text-slate-400'}`} />
+                  <Icon className={`w-4 h-4 ${active ? 'text-white drop-shadow' : 'text-slate-400'}`} />
                   <span>{item.label}</span>
                 </div>
                 {item.badge && (
@@ -119,14 +119,14 @@ export function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`floating-tab flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                className={`floating-tab flex items-center justify-between px-3 py-2 rounded-2xl text-xs font-semibold transition-all ${
                   active
-                    ? 'floating-tab-active bg-indigo-600 text-white shadow-lg shadow-indigo-600/40 border border-indigo-400/50'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
+                    ? 'floating-tab-active text-white'
+                    : 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
-                  <Icon className={`w-4 h-4 ${active ? 'text-white' : 'text-slate-400'}`} />
+                  <Icon className={`w-4 h-4 ${active ? 'text-white drop-shadow' : 'text-slate-400'}`} />
                   <span>{item.label}</span>
                 </div>
               </Link>
@@ -143,18 +143,18 @@ export function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`floating-tab flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                className={`floating-tab flex items-center justify-between px-3 py-2 rounded-2xl text-xs font-semibold transition-all ${
                   active
-                    ? 'floating-tab-active bg-indigo-600 text-white shadow-lg shadow-indigo-600/40 border border-indigo-400/50'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
+                    ? 'floating-tab-active text-white'
+                    : 'text-slate-400 hover:text-white hover:bg-white/10 border border-transparent'
                 }`}
               >
                 <div className="flex items-center gap-2.5">
-                  <Icon className={`w-4 h-4 ${active ? 'text-white' : 'text-slate-400'}`} />
+                  <Icon className={`w-4 h-4 ${active ? 'text-white drop-shadow' : 'text-slate-400'}`} />
                   <span>{item.label}</span>
                 </div>
                 {item.badge && (
-                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                     {item.badge}
                   </span>
                 )}
@@ -164,9 +164,9 @@ export function Sidebar() {
         </nav>
 
         {/* User profile footer */}
-        <div className="p-3 border-t border-white/10 shrink-0">
-          <div className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/5 border border-white/10">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-600 text-white font-bold flex items-center justify-center text-[11px]">
+        <div className="p-3 border-t border-white/10 shrink-0 bg-white/[0.02]">
+          <div className="flex items-center gap-3 px-3 py-2 rounded-2xl bg-white/5 border border-white/10 shadow-inner">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-600 text-white font-bold flex items-center justify-center text-[11px] shadow-sm">
               RS
             </div>
             <div className="flex-1 min-w-0">
@@ -182,7 +182,7 @@ export function Sidebar() {
       </aside>
 
       {/* Mobile Floating Bottom Dock */}
-      <nav className="lg:hidden fixed bottom-3 left-3 right-3 z-50 glass-panel rounded-2xl p-1.5 flex items-center justify-around shadow-2xl border border-white/15">
+      <nav className="lg:hidden fixed bottom-3 left-3 right-3 z-50 glass-panel rounded-3xl p-1.5 flex items-center justify-around shadow-[0_15px_35px_rgba(0,0,0,0.8)] border border-white/20 backdrop-blur-2xl">
         {[
           { href: '/', label: 'Home', icon: LayoutDashboard },
           { href: '/plan', label: 'Plan', icon: CalendarDays },
@@ -197,9 +197,9 @@ export function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center justify-center p-2 rounded-xl transition-all ${
+              className={`flex flex-col items-center justify-center p-2 rounded-2xl transition-all ${
                 active
-                  ? 'bg-indigo-600 text-white shadow-md'
+                  ? 'floating-tab-active text-white'
                   : 'text-slate-400 hover:text-white'
               }`}
             >

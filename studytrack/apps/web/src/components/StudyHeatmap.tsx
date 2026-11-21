@@ -37,7 +37,7 @@ export function StudyHeatmap() {
   };
 
   return (
-    <div className="glass-panel rounded-2xl p-4 sm:p-5 w-full max-w-full overflow-hidden">
+    <div className="glass-panel rounded-3xl p-5 sm:p-6 w-full max-w-full overflow-hidden border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)]">
       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
         <div>
           <h3 className="text-xs sm:text-sm font-bold text-white">

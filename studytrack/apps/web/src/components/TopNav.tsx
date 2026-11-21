@@ -10,6 +10,7 @@ import {
   Languages,
   Sun,
   Moon,
+  Sparkles,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useI18n } from '../context/I18nContext';
@@ -37,19 +38,19 @@ export function TopNav() {
   };
 
   return (
-    <header className="h-16 px-4 sm:px-6 glass-panel border-b border-white/10 flex items-center justify-between sticky top-0 z-30 w-full max-w-full">
+    <header className="h-16 px-4 sm:px-6 glass-panel rounded-3xl mx-3 sm:mx-6 mt-3 mb-2 border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)] backdrop-blur-3xl flex items-center justify-between sticky top-3 z-30 w-[calc(100%-1.5rem)] sm:w-[calc(100%-3rem)] transition-all">
       {/* Left: Quick search trigger & sample badge */}
       <div className="flex items-center gap-3 min-w-0">
         <button
           onClick={() => {
             window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }));
           }}
-          className="flex items-center gap-2 px-3 py-1.5 text-xs text-slate-300 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-colors"
+          className="floating-pill flex items-center gap-2 px-3.5 py-1.5 text-xs text-slate-300 rounded-2xl hover:text-white"
         >
-          <Search className="w-3.5 h-3.5 text-slate-400" />
+          <Search className="w-3.5 h-3.5 text-indigo-400" />
           <span className="hidden sm:inline">Search features, topics...</span>
           <span className="sm:hidden">Search...</span>
-          <kbd className="hidden md:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-black/40 rounded border border-white/10 text-slate-400">
+          <kbd className="hidden md:inline-block px-1.5 py-0.5 text-[9px] font-mono bg-black/50 rounded-lg border border-white/10 text-slate-400">
             Ctrl+K
           </kbd>
         </button>
@@ -59,69 +60,65 @@ export function TopNav() {
 
       {/* Right Actions */}
       <div className="flex items-center gap-2 shrink-0">
-        {/* Streak counter */}
+        {/* Streak counter with neon glow */}
         <div
-          className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/20"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-black rounded-2xl bg-orange-500/15 text-orange-400 border border-orange-500/30 shadow-[0_0_15px_rgba(249,115,22,0.2)]"
           title={`${userStats.currentStreak} day study streak!`}
         >
-          <Flame className="w-3.5 h-3.5 fill-orange-500 text-orange-500" />
+          <Flame className="w-4 h-4 fill-orange-500 text-orange-500 animate-pulse" />
           <span>{userStats.currentStreak}d</span>
         </div>
 
-        {/* Judge Mode Switcher */}
+        {/* Judge Mode Switcher with 3D Float */}
         <button
           onClick={openJudgeModal}
-          className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-xl border transition-all ${
+          className={`floating-pill flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-2xl border transition-all ${
             activeScenario !== 'default'
-              ? 'bg-amber-500 text-white border-amber-400 shadow-lg shadow-amber-500/30'
-              : 'bg-white/5 text-slate-200 border-white/10 hover:bg-white/10'
+              ? 'floating-pill-active !bg-amber-500 text-white !border-amber-300 shadow-[0_8px_25px_rgba(245,158,11,0.5)]'
+              : 'text-slate-200'
           }`}
           title="Open Judge Mode to compare student scenarios"
         >
           <SlidersHorizontal className="w-3.5 h-3.5 text-amber-400" />
-          <span className="hidden md:inline">Judge Mode:</span>
-          <span>{scenarioLabels[activeScenario] ?? 'Scenario'}</span>
+          <span className="hidden md:inline">Judge Mode</span>
+          {activeScenario !== 'default' && (
+            <span className="text-[10px] bg-black/30 px-1.5 py-0.5 rounded-full font-mono">
+              {scenarioLabels[activeScenario]}
+            </span>
+          )}
         </button>
 
-        {/* Guided Tour */}
+        {/* 60s Tour Button */}
         <button
           onClick={openTour}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 text-xs font-bold rounded-xl text-slate-200 bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+          className="floating-pill hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-2xl text-slate-300 hover:text-white"
+          title="Start 60-Second Evaluator Tour"
         >
           <Compass className="w-3.5 h-3.5 text-indigo-400" />
-          <span className="hidden sm:inline">Tour</span>
+          <span>Tour</span>
         </button>
 
-        {/* Reset Demo */}
-        <button
-          onClick={() => {
-            resetDemoData();
-            alert('Demo data successfully reset to clean pre-loaded state!');
-          }}
-          className="p-1.5 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
-          title="Reset all demo data back to clean state"
-        >
-          <RotateCcw className="w-4 h-4" />
-        </button>
-
-        {/* Language Toggle */}
+        {/* Language Switcher */}
         <button
           onClick={toggleLang}
-          className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-bold rounded-xl bg-white/5 text-slate-200 border border-white/10 hover:bg-white/10 transition-colors"
-          title="Toggle between English and Hinglish"
+          className="floating-pill flex items-center gap-1 px-2.5 py-1.5 text-xs font-bold rounded-2xl text-slate-300 hover:text-white"
+          title="Switch English / Hinglish"
         >
-          <Languages className="w-3.5 h-3.5 text-indigo-400" />
-          <span>{lang === 'en' ? 'EN' : 'हिं'}</span>
+          <Languages className="w-3.5 h-3.5 text-emerald-400" />
+          <span className="uppercase text-[11px] font-mono">{lang}</span>
         </button>
 
-        {/* Theme Toggle */}
+        {/* Reset Demo State Button */}
         <button
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          className="p-1.5 rounded-xl text-slate-300 bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
-          title="Toggle Theme"
+          onClick={() => {
+            if (confirm('Reset all demo data back to clean state?')) {
+              resetDemoData();
+            }
+          }}
+          className="floating-pill p-2 text-slate-400 hover:text-rose-400 rounded-2xl"
+          title="Reset Demo to Original Seed"
         >
-          <Sun className="w-4 h-4 hidden dark:block" />
-          <Moon className="w-4 h-4 block dark:hidden" />
+          <RotateCcw className="w-3.5 h-3.5" />
         </button>
       </div>
     </header>

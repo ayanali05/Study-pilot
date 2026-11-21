@@ -77,8 +77,8 @@ export function GuidedTour() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 max-w-md w-full bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border-2 border-indigo-500 p-5 animate-in slide-in-from-bottom-4 duration-200">
-      <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+    <div className="fixed bottom-6 right-6 z-50 max-w-md w-full glass-panel rounded-3xl shadow-[0_20px_50px_rgba(99,102,241,0.45)] border-2 border-indigo-400/80 p-5 sm:p-6 animate-in slide-in-from-bottom-4 duration-300">
+      <div className="flex items-center justify-between pb-3 border-b border-white/10">
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 rounded-md bg-indigo-500/15 text-indigo-600 flex items-center justify-center font-bold text-xs">
             <Sparkles className="w-3.5 h-3.5" />

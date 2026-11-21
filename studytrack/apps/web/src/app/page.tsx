@@ -45,16 +45,16 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6 w-full max-w-full overflow-x-hidden pb-8">
-      {/* Realtime Telemetry Status Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/80 text-xs text-indigo-700 dark:text-indigo-300">
-        <div className="flex items-center gap-2">
+      {/* Realtime Telemetry Status Bar with 3D Glass Pill */}
+      <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3 rounded-3xl glass-panel border border-indigo-500/30 text-xs text-indigo-300 shadow-[0_10px_30px_rgba(99,102,241,0.15)]">
+        <div className="flex items-center gap-2.5">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
           </span>
-          <span className="font-bold">In-App Telemetry & YouTube Tracker Active:</span>
-          <span className="hidden sm:inline text-indigo-600/90 dark:text-indigo-400">
-            Sessions, lecture notes, and study logs auto-feed streaks and predictions in realtime.
+          <span className="font-extrabold text-white tracking-wide">In-App Telemetry Active:</span>
+          <span className="hidden sm:inline text-indigo-200/80">
+            Realtime session tracking, YouTube lecture logs, and exam countdown active.
           </span>
         </div>
         <div className="flex items-center gap-2">
@@ -62,29 +62,31 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Hero Metric Cards Grid (4 columns, responsive minmax) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Hero Metric Cards Grid (4 columns with 3D Floating Air Physics) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 floating-tab-container">
         {/* Card 1: Hero Predicted SGPA */}
         <Link
           href="/predictor"
-          className="group p-5 rounded-2xl bg-gradient-to-br from-indigo-600 via-indigo-700 to-indigo-800 text-white shadow-lg shadow-indigo-500/20 hover:scale-[1.01] transition-all relative overflow-hidden"
+          className="group p-6 rounded-3xl glass-card-interactive bg-gradient-to-br from-indigo-600/80 via-indigo-700/70 to-purple-800/80 border-indigo-400/50 text-white shadow-[0_15px_35px_rgba(99,102,241,0.35)] relative overflow-hidden"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-indigo-100 uppercase tracking-wider">
+            <span className="text-xs font-bold text-indigo-100 uppercase tracking-wider">
               {t('predictedSgpa')}
             </span>
-            <Target className="w-4 h-4 text-indigo-200" />
+            <div className="p-1.5 rounded-xl bg-white/10 border border-white/20">
+              <Target className="w-4 h-4 text-white" />
+            </div>
           </div>
           <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-3xl font-black tracking-tight">
+            <span className="text-4xl font-black tracking-tight drop-shadow-md">
               {prediction.sgpa.toFixed(2)}
             </span>
             <span className="text-xs text-indigo-200 font-medium">/ 10.0</span>
           </div>
-          <div className="mt-2 flex items-center justify-between text-[11px] text-indigo-100/90 border-t border-indigo-500/60 pt-2">
+          <div className="mt-3 flex items-center justify-between text-[11px] text-indigo-100/90 border-t border-white/15 pt-2.5">
             <span>Range: {(prediction.sgpa - 0.4).toFixed(1)} – {(prediction.sgpa + 0.3).toFixed(1)}</span>
-            <span className="group-hover:translate-x-1 transition-transform flex items-center gap-0.5 font-semibold">
-              Mode B <ArrowRight className="w-3 h-3" />
+            <span className="group-hover:translate-x-1.5 transition-transform flex items-center gap-1 font-bold text-white">
+              Mode B <ArrowRight className="w-3.5 h-3.5" />
             </span>
           </div>
         </Link>
@@ -92,68 +94,74 @@ export default function DashboardPage() {
         {/* Card 2: Priority Syllabus Covered */}
         <Link
           href="/roadmap"
-          className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-indigo-400 dark:hover:border-indigo-600 transition-all"
+          className="group p-6 rounded-3xl glass-card-interactive border-white/10 hover:border-indigo-500/40"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
               {t('priorityCoverage')}
             </span>
-            <TrendingUp className="w-4 h-4 text-indigo-500" />
+            <div className="p-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20">
+              <TrendingUp className="w-4 h-4 text-indigo-400" />
+            </div>
           </div>
           <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-3xl font-black text-slate-900 dark:text-white">
+            <span className="text-4xl font-black text-white drop-shadow-sm">
               {avgPriorityCoverage.toFixed(0)}%
             </span>
             <span className="text-xs text-slate-400">vs {plainCoveragePercent.toFixed(0)}% plain</span>
           </div>
-          <div className="mt-2 text-[11px] text-slate-500 border-t border-slate-100 dark:border-slate-800 pt-2 flex items-center justify-between">
+          <div className="mt-3 text-[11px] text-slate-400 border-t border-white/10 pt-2.5 flex items-center justify-between">
             <span>Gap: {avgPriorityCoverage - plainCoveragePercent > 0 ? '+' : ''}{(avgPriorityCoverage - plainCoveragePercent).toFixed(0)}%</span>
-            <span className="font-semibold text-indigo-600 dark:text-indigo-400">High-yield focus</span>
+            <span className="font-bold text-indigo-400">High-yield focus</span>
           </div>
         </Link>
 
         {/* Card 3: Study Streak */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="p-6 rounded-3xl glass-card-interactive border-white/10 hover:border-orange-500/40">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
               {t('dayStreak')}
             </span>
-            <Flame className="w-4 h-4 fill-orange-500 text-orange-500" />
+            <div className="p-1.5 rounded-xl bg-orange-500/10 border border-orange-500/20">
+              <Flame className="w-4 h-4 fill-orange-500 text-orange-500" />
+            </div>
           </div>
           <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-3xl font-black text-slate-900 dark:text-white">
+            <span className="text-4xl font-black text-white drop-shadow-sm">
               {userStats.currentStreak}
             </span>
             <span className="text-xs text-slate-400">days active</span>
           </div>
-          <div className="mt-2 text-[11px] text-slate-500 border-t border-slate-100 dark:border-slate-800 pt-2 flex items-center justify-between">
+          <div className="mt-3 text-[11px] text-slate-400 border-t border-white/10 pt-2.5 flex items-center justify-between">
             <span>Best: {userStats.longestStreak} days</span>
-            <span className="text-orange-500 font-semibold">+10 XP daily</span>
+            <span className="text-orange-400 font-bold">+10 XP daily</span>
           </div>
         </div>
 
         {/* Card 4: Study Telemetry Hours */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="p-6 rounded-3xl glass-card-interactive border-white/10 hover:border-emerald-500/40">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
               {t('totalStudyHours')}
             </span>
-            <Clock className="w-4 h-4 text-emerald-500" />
+            <div className="p-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+              <Clock className="w-4 h-4 text-emerald-400" />
+            </div>
           </div>
           <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-3xl font-black text-slate-900 dark:text-white">
+            <span className="text-4xl font-black text-white drop-shadow-sm">
               {(userStats.totalStudyMinutes / 60).toFixed(1)}
             </span>
             <span className="text-xs text-slate-400">hours tracked</span>
           </div>
-          <div className="mt-2 text-[11px] text-slate-500 border-t border-slate-100 dark:border-slate-800 pt-2 flex items-center justify-between">
+          <div className="mt-3 text-[11px] text-slate-400 border-t border-white/10 pt-2.5 flex items-center justify-between">
             <span>{userStats.totalSessionsCount} sessions</span>
-            <span className="text-emerald-500 font-semibold">{userStats.xp} XP</span>
+            <span className="text-emerald-400 font-bold">{userStats.xp} XP</span>
           </div>
         </div>
       </div>
 
-      {/* Two Hero Features Showcase Banner */}
+      {/* Two Hero Features 3D Holographic Showcase Banner */}
       <HeroFeaturesBanner />
 
       {/* Bento Grid: 2 Columns on Desktop (7 cols / 5 cols) */}
@@ -164,19 +172,19 @@ export default function DashboardPage() {
           <InAppStudyTracker />
 
           {/* 2. Subject Dual Progress Bars */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+          <div className="glass-panel rounded-3xl p-6 sm:p-7 border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)] space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div>
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                <h3 className="text-sm font-bold text-white">
                   Semester 3 Subjects — Plain vs Priority Coverage
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-xs text-slate-400">
                   The gap between the gray bar and indigo bar indicates whether you studied high-yield exam material.
                 </p>
               </div>
               <Link
                 href="/roadmap"
-                className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 shrink-0"
+                className="floating-pill text-xs font-bold text-indigo-400 hover:text-white px-3 py-1.5 rounded-xl flex items-center gap-1 shrink-0"
               >
                 Full Roadmap <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -186,11 +194,11 @@ export default function DashboardPage() {
               {prediction.subjects.map((sub) => (
                 <div
                   key={sub.subjectId}
-                  className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800"
+                  className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-indigo-500/30 transition-all"
                 >
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center justify-between mb-2.5">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-slate-900 dark:text-white">
+                      <span className="text-xs font-bold text-white">
                         {sub.subjectName}
                       </span>
                       <span className="text-[10px] font-mono text-slate-400">
@@ -198,8 +206,8 @@ export default function DashboardPage() {
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-slate-500">Predicted Grade:</span>
-                      <span className="text-xs font-extrabold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                      <span className="text-xs text-slate-400">Predicted:</span>
+                      <span className="text-xs font-black px-2.5 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
                         {sub.predictedGrade} ({sub.predictedTotal}/100)
                       </span>
                     </div>
@@ -225,23 +233,25 @@ export default function DashboardPage() {
           <TodoList />
 
           {/* 2. Top "Study Next" High-Impact Recommendations */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+          <div className="glass-panel rounded-3xl p-6 sm:p-7 border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)] space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                <div className="p-1.5 rounded-xl bg-indigo-500/20 text-indigo-400">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <h3 className="text-sm font-bold text-white">
                   Study Next (Marginal SGPA Gain)
                 </h3>
               </div>
               <Link
                 href="/recommendations"
-                className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 shrink-0"
+                className="floating-pill text-xs font-bold text-indigo-400 hover:text-white px-3 py-1.5 rounded-xl flex items-center gap-1 shrink-0"
               >
                 All <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-400">
               Topics ranked by highest predicted SGPA increase per study hour invested:
             </p>
 
@@ -249,29 +259,29 @@ export default function DashboardPage() {
               {recommendations.slice(0, 3).map((rec) => (
                 <div
                   key={rec.topicId}
-                  className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-800 space-y-1.5"
+                  className="p-3.5 rounded-2xl glass-card-interactive border-white/10 space-y-2"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                    <span className="text-xs font-bold text-white truncate">
                       {rec.topicName}
                     </span>
                     <span
-                      className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                         rec.bucket === 'Critical'
-                          ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400'
+                          ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
                           : rec.bucket === 'Important'
-                          ? 'bg-amber-500/15 text-amber-600 dark:text-amber-400'
-                          : 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
+                          ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                          : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
                       }`}
                     >
                       {rec.bucket}
                     </span>
                   </div>
-                  <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between">
+                  <div className="text-[11px] text-slate-400 flex items-center justify-between">
                     <span>{rec.subjectName}</span>
-                    <span>~{rec.estimatedHours}h est.</span>
+                    <span className="font-mono">~{rec.estimatedHours}h est.</span>
                   </div>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-900 p-1.5 rounded border border-slate-100 dark:border-slate-800">
+                  <p className="text-[11px] text-slate-300 bg-white/5 p-2 rounded-xl border border-white/5">
                     {rec.reason}
                   </p>
                 </div>
@@ -280,7 +290,7 @@ export default function DashboardPage() {
 
             <Link
               href="/what-if"
-              className="w-full mt-2 py-2.5 px-4 text-xs font-bold rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200 dark:border-indigo-800 text-center flex items-center justify-center gap-1.5 transition-colors"
+              className="floating-tab-active w-full mt-2 py-3 px-4 text-xs font-bold rounded-2xl text-white text-center flex items-center justify-center gap-2 transition-all shadow-lg"
             >
               <span>Simulate SGPA Gains in What-If</span>
               <ArrowRight className="w-3.5 h-3.5" />

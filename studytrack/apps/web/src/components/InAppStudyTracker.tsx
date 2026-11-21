@@ -148,20 +148,20 @@ export function InAppStudyTracker() {
 
   return (
     <>
-      {/* Compact In-App Tracker Glass Bar */}
-      <div className="p-4 rounded-2xl bg-slate-900/40 dark:bg-slate-900/60 backdrop-blur-xl border border-white/10 shadow-xl flex flex-wrap items-center justify-between gap-4">
+      {/* Compact In-App Tracker 3D Glass Bar */}
+      <div className="p-4 sm:p-5 rounded-3xl glass-panel border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)] flex flex-wrap items-center justify-between gap-4">
         {/* Left: Mode toggle & Subject selection */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center bg-white/5 p-1 rounded-xl border border-white/10">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center bg-white/5 p-1 rounded-2xl border border-white/10 floating-tab-container">
             <button
               onClick={() => {
                 setMode('pomodoro');
                 setElapsedSeconds(0);
                 setIsRunning(false);
               }}
-              className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${
+              className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all ${
                 mode === 'pomodoro'
-                  ? 'bg-indigo-600 text-white shadow-md'
+                  ? 'floating-tab-active text-white'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -173,9 +173,9 @@ export function InAppStudyTracker() {
                 setElapsedSeconds(0);
                 setIsRunning(false);
               }}
-              className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${
+              className={`px-3.5 py-1.5 text-xs font-bold rounded-xl transition-all ${
                 mode === 'stopwatch'
-                  ? 'bg-indigo-600 text-white shadow-md'
+                  ? 'floating-tab-active text-white'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -186,7 +186,7 @@ export function InAppStudyTracker() {
           <select
             value={selectedSubjectId}
             onChange={(e) => setSelectedSubjectId(e.target.value)}
-            className="px-3 py-1.5 text-xs font-semibold rounded-xl bg-white/5 border border-white/10 text-white outline-none cursor-pointer"
+            className="floating-pill px-3.5 py-1.5 text-xs font-semibold rounded-2xl text-white outline-none cursor-pointer"
           >
             {syllabus.subjects.map((s) => (
               <option key={s.id} value={s.id} className="bg-slate-900 text-white">
@@ -198,7 +198,9 @@ export function InAppStudyTracker() {
 
         {/* Center: Live Timer Display & Controls */}
         <div className="flex items-center gap-4">
-          <div className="font-mono text-2xl font-black text-white tracking-widest px-3 py-1 rounded-xl bg-white/5 border border-white/10">
+          <div className={`font-mono text-2xl font-black tracking-widest px-4 py-1 rounded-2xl bg-black/40 border border-white/10 shadow-inner ${
+            isRunning ? 'text-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.3)] animate-pulse' : 'text-white'
+          }`}>
             {formatTime(elapsedSeconds)}
           </div>
 
@@ -206,7 +208,7 @@ export function InAppStudyTracker() {
             {!isRunning ? (
               <button
                 onClick={handleStart}
-                className="p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition-all active:scale-95"
+                className="floating-pill p-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-md transition-all active:scale-95"
                 title="Start Study Session"
               >
                 <Play className="w-4 h-4 fill-white" />
@@ -214,7 +216,7 @@ export function InAppStudyTracker() {
             ) : (
               <button
                 onClick={handlePause}
-                className="p-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white shadow-md transition-all active:scale-95"
+                className="floating-pill p-2.5 rounded-2xl bg-amber-600 hover:bg-amber-500 text-white shadow-md transition-all active:scale-95"
                 title="Pause"
               >
                 <Pause className="w-4 h-4 fill-white" />
@@ -224,7 +226,7 @@ export function InAppStudyTracker() {
             <button
               onClick={handleStopAndSave}
               disabled={elapsedSeconds === 0}
-              className="p-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white shadow-md transition-all active:scale-95 disabled:opacity-40"
+              className="floating-pill p-2.5 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white shadow-md transition-all active:scale-95 disabled:opacity-40"
               title="Log Study Session to Dashboard & XP"
             >
               <Square className="w-4 h-4 fill-white" />
@@ -236,15 +238,15 @@ export function InAppStudyTracker() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsVideoModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl bg-red-600/20 text-red-300 border border-red-500/30 hover:bg-red-600/30 transition-all"
+            className="floating-pill flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-2xl bg-red-600/15 text-red-300 border-red-500/30 hover:bg-red-600/30 transition-all"
           >
             <Youtube className="w-3.5 h-3.5 text-red-400" />
-            <span>Video Study Player</span>
+            <span>Video Player</span>
           </button>
 
           <button
             onClick={() => setIsQuickLogOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 hover:bg-indigo-500/30 transition-all"
+            className="floating-pill flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-2xl bg-indigo-500/15 text-indigo-300 border-indigo-500/30 hover:bg-indigo-500/30 transition-all"
           >
             <PlusCircle className="w-3.5 h-3.5 text-indigo-400" />
             <span>Quick Log</span>

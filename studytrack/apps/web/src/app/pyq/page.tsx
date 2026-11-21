@@ -52,16 +52,16 @@ export default function PYQPage() {
           </p>
         </div>
 
-        {/* Subject Picker */}
-        <div className="flex items-center gap-2 overflow-x-auto">
+        {/* 3D Floating Subject Picker */}
+        <div className="floating-tab-container flex items-center gap-2 overflow-x-auto">
           {syllabus.subjects.map((sub) => (
             <button
               key={sub.id}
               onClick={() => setSelectedSubjectId(sub.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+              className={`floating-tab px-3.5 py-1.5 rounded-2xl text-xs font-bold whitespace-nowrap transition-all ${
                 selectedSubjectId === sub.id
-                  ? 'bg-indigo-600 text-white shadow-sm'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:bg-slate-100'
+                  ? 'floating-tab-active text-white'
+                  : 'text-slate-300 hover:text-white glass-panel'
               }`}
             >
               {sub.name}
@@ -71,7 +71,7 @@ export default function PYQPage() {
       </div>
 
       {/* Tunable PYQ Weight Sliders */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="glass-panel rounded-3xl p-6 border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)] space-y-4">
         <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2">
             <Sliders className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />

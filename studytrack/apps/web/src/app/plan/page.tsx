@@ -116,24 +116,24 @@ export default function PlanPage() {
       </div>
 
       {/* Controls & Summary Bar */}
-      <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="p-6 rounded-3xl glass-panel border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)] grid grid-cols-1 md:grid-cols-3 gap-5">
         <div>
-          <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+          <label className="text-xs font-bold text-slate-300 block mb-1.5">
             Exam Start Date:
           </label>
           <input
             type="date"
             value={examDate}
             onChange={(e) => setExamDate(e.target.value)}
-            className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3.5 py-2.5 text-xs font-semibold rounded-2xl bg-white/5 border border-white/15 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner"
           />
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1">
+          <label className="text-xs font-bold text-slate-300 block mb-1.5">
             Daily Study Capacity:
           </label>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 pt-1">
             <input
               type="range"
               min="1"
@@ -141,32 +141,32 @@ export default function PlanPage() {
               step="0.5"
               value={dailyHours}
               onChange={(e) => setDailyHours(parseFloat(e.target.value))}
-              className="w-full accent-indigo-600 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer"
+              className="w-full accent-indigo-500 h-2 bg-white/10 rounded-lg cursor-pointer"
             />
-            <span className="text-xs font-bold font-mono text-indigo-600 dark:text-indigo-400 shrink-0">
+            <span className="text-xs font-bold font-mono text-indigo-400 shrink-0">
               {dailyHours}h / day
             </span>
           </div>
         </div>
 
-        <div className="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 flex items-center justify-between text-xs">
+        <div className="p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-between text-xs">
           <div>
-            <div className="text-slate-500">Days to Exam:</div>
-            <div className="text-lg font-black text-indigo-600 dark:text-indigo-400">
+            <div className="text-slate-400">Days to Exam:</div>
+            <div className="text-xl font-black text-indigo-400 drop-shadow">
               {plan.totalDays} Days
             </div>
           </div>
           <div className="text-right">
-            <div className="text-slate-500">Uncovered Critical:</div>
-            <div className="text-lg font-black text-rose-600 dark:text-rose-400">
+            <div className="text-slate-400">Uncovered Critical:</div>
+            <div className="text-xl font-black text-rose-400 drop-shadow">
               {plan.uncoveredCritical} Topics
             </div>
           </div>
         </div>
       </div>
 
-      {/* Week Selector Tabs */}
-      <div className="flex flex-wrap items-center gap-2">
+      {/* 3D Floating Week Selector Tabs */}
+      <div className="floating-tab-container flex flex-wrap items-center gap-2.5">
         {weeks.map((_, idx) => {
           const weekNum = idx + 1;
           const isActive = activeWeek === weekNum;
@@ -174,10 +174,10 @@ export default function PlanPage() {
             <button
               key={weekNum}
               onClick={() => setActiveWeek(weekNum)}
-              className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${
+              className={`floating-tab px-4 py-2 text-xs font-bold rounded-2xl transition-all ${
                 isActive
-                  ? 'bg-indigo-600 text-white shadow-sm'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:border-slate-300'
+                  ? 'floating-tab-active text-white'
+                  : 'text-slate-300 hover:text-white glass-panel'
               }`}
             >
               Week {weekNum} ({weeks[idx]?.[0]?.date} — {weeks[idx]?.[weeks[idx]!.length - 1]?.date})
@@ -186,18 +186,18 @@ export default function PlanPage() {
         })}
       </div>
 
-      {/* Plan Timeline Grid for Current Week */}
+      {/* Plan Timeline Grid for Current Week with Glass Cards */}
       <div className="space-y-4">
         {currentDays.map((day) => (
           <div
             key={day.date}
-            className={`p-5 rounded-2xl border transition-all ${
+            className={`p-6 rounded-3xl border transition-all ${
               day.isReviewDay
-                ? 'bg-amber-50/40 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/60'
-                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+                ? 'bg-amber-950/20 border-amber-500/40 shadow-[0_10px_30px_rgba(245,158,11,0.15)]'
+                : 'glass-panel border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)]'
             }`}
           >
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-3.5 border-b border-white/10">
               <div className="flex items-center gap-3">
                 <span className="text-xs font-black px-2.5 py-1 rounded-lg bg-indigo-600 text-white">
                   Day {day.dayNumber}

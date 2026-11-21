@@ -99,8 +99,8 @@ export default function WhatIfPage() {
         )}
       </div>
 
-      {/* Comparison Scoreboard Card */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+      {/* Comparison Scoreboard 3D Glass Card */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-6 rounded-3xl glass-panel border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)]">
         {/* Current Real SGPA */}
         <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 space-y-1">
           <div className="text-xs font-semibold text-slate-500">Current Real SGPA</div>

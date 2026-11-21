@@ -60,10 +60,10 @@ export default function FlashcardsPage() {
             </span>
           </div>
 
-          {/* Flashcard Component */}
+          {/* 3D Floating Air Flashcard */}
           <div
             onClick={() => setIsFlipped(!isFlipped)}
-            className="min-h-[260px] p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-indigo-100 dark:border-indigo-900/40 shadow-xl shadow-indigo-500/5 cursor-pointer flex flex-col justify-between transition-all hover:scale-[1.01] select-none"
+            className="min-h-[260px] p-8 rounded-3xl glass-panel border border-indigo-400/40 shadow-[0_20px_50px_rgba(99,102,241,0.25)] cursor-pointer flex flex-col justify-between transition-all select-none hover:border-indigo-400 floating-tab"
           >
             <div className="flex justify-between items-center">
               <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">

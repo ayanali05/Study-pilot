@@ -52,7 +52,7 @@ export function TodoList() {
   };
 
   return (
-    <div className="bg-slate-900/40 dark:bg-slate-900/60 backdrop-blur-xl rounded-2xl p-5 border border-white/10 shadow-xl space-y-4">
+    <div className="p-6 rounded-3xl glass-panel border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.6)] space-y-4">
       {/* Header with Progress Ring */}
       <div className="flex items-center justify-between pb-3 border-b border-white/10">
         <div className="flex items-center gap-3">
@@ -163,14 +163,14 @@ export function TodoList() {
         </form>
       )}
 
-      {/* Subject Filter Pills */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+      {/* Subject Filter Pills with 3D Float */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs floating-tab-container">
         <button
           onClick={() => setFilterSubject('all')}
-          className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
+          className={`floating-pill px-3 py-1 rounded-xl font-bold transition-all ${
             filterSubject === 'all'
-              ? 'bg-indigo-600 text-white'
-              : 'text-slate-400 hover:text-white bg-white/5'
+              ? 'floating-pill-active text-white'
+              : 'text-slate-400 hover:text-white'
           }`}
         >
           All ({todoTasks.length})
@@ -179,10 +179,10 @@ export function TodoList() {
           <button
             key={s.id}
             onClick={() => setFilterSubject(s.id)}
-            className={`px-2.5 py-1 rounded-lg font-medium transition-all whitespace-nowrap ${
+            className={`floating-pill px-3 py-1 rounded-xl font-bold transition-all whitespace-nowrap ${
               filterSubject === s.id
-                ? 'bg-indigo-600 text-white'
-                : 'text-slate-400 hover:text-white bg-white/5'
+                ? 'floating-pill-active text-white'
+                : 'text-slate-400 hover:text-white'
             }`}
           >
             {s.name.split(' ')[0]} ({todoTasks.filter((t) => t.subjectId === s.id).length})
@@ -191,7 +191,7 @@ export function TodoList() {
       </div>
 
       {/* Tasks List */}
-      <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+      <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
         {filteredTasks.map((task) => {
           const isDone = task.completed;
           const subject = syllabus.subjects.find((s) => s.id === task.subjectId);
@@ -199,10 +199,10 @@ export function TodoList() {
           return (
             <div
               key={task.id}
-              className={`p-3 rounded-xl border transition-all flex items-center justify-between gap-3 ${
+              className={`p-3.5 rounded-2xl transition-all flex items-center justify-between gap-3 ${
                 isDone
-                  ? 'bg-white/5 border-white/5 opacity-60'
-                  : 'bg-white/5 border-white/10 hover:border-white/20'
+                  ? 'bg-white/5 border border-white/5 opacity-60'
+                  : 'glass-card-interactive border-white/10'
               }`}
             >
               <div className="flex items-center gap-3 min-w-0">
