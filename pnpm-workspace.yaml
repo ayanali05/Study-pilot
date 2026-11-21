@@ -1,0 +1,3 @@
+packages:
+  - 'studytrack/apps/*'
+  - 'studytrack/packages/*'

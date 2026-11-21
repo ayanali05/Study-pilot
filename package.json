@@ -1,8 +1,12 @@
 {
-  "name": "studypilot-root",
+  "name": "studytrack",
+  "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@9.15.4",
   "scripts": {
-    "build": "cd studytrack && pnpm install --no-frozen-lockfile && pnpm --filter @studytrack/web build"
+    "dev": "pnpm --filter @studytrack/web dev",
+    "build": "pnpm --filter @studytrack/web build",
+    "start": "pnpm --filter @studytrack/web start",
+    "test": "pnpm --filter @studytrack/engine test"
   }
 }
