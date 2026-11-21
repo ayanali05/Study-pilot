@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, ChevronRight, ChevronLeft, Sparkles } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft, Sparkles, Target, Calendar, BarChart3, Award } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
 import { useRouter } from 'next/navigation';
 
@@ -15,30 +15,30 @@ export function GuidedTour() {
     {
       step: 1,
       route: '/',
-      title: '1. The Hero Pitch & Live Dashboard',
+      title: '1. Live Bento Dashboard & Telemetry',
       description:
-        'StudyTrack bridges what students actually study with what AKTU past papers prove will be asked. Notice the Dual Progress Bars: plain topic count vs priority-weighted coverage. The gap between them is the core insight.',
+        'StudyTrack combines what you study with what AKTU past papers prove will be asked. Notice the Dual Progress Bars: plain topic count vs priority-weighted coverage. The gap is the core insight.',
     },
     {
       step: 2,
-      route: '/roadmap',
-      title: '2. Syllabus Roadmap & Dual Progress',
+      route: '/predictor',
+      title: '2. HERO FEATURE: Mode B Academic Estimator',
       description:
-        'Explore CSE Sem 3 subjects. Clicking any topic toggles it as covered and instantly recalculates SGPA and priority weights across the entire system.',
+        'Mode B calculates dynamic SGPA using 10,000 Monte Carlo runs based on covered syllabus, 5-year PYQ repeat probability, and internal marks. Click "How was this calculated?" for complete formula transparency.',
     },
     {
       step: 3,
-      route: '/pyq',
-      title: '3. PYQ Intelligence & Live Sliders',
+      route: '/plan',
+      title: '3. HERO FEATURE: Personalized Daily Study Calendar',
       description:
-        '5 years of actual AKTU question papers analyzed. See which topics appeared 5/5 years, frequency, marks weights, and recency. Adjust the live weight sliders to customize the formula ranking.',
+        'Day-by-day exam roadmap prioritizing Critical PYQs first. Interactive week tabs, topic completion checkboxes (+45 XP!), and 1-click export to Google/Apple Calendar (.ics).',
     },
     {
       step: 4,
-      route: '/predictor',
-      title: '4. SGPA Predictor & 10,000 Monte Carlo Runs',
+      route: '/pyq',
+      title: '4. PYQ Intelligence & 5-Year Repeat Sliders',
       description:
-        'The Hero Feature: Monte Carlo simulation with 10,000 runs producing a probability distribution of SGPA. Slide the target to see the probability of achieving an 8.5+ SGPA, plus full formula explainability.',
+        '5 years of actual AKTU question papers analyzed. See topics that appeared 5/5 years, frequency weights, and live sliders to customize the formula ranking.',
     },
     {
       step: 5,
@@ -49,10 +49,10 @@ export function GuidedTour() {
     },
     {
       step: 6,
-      route: '/recommendations',
-      title: '6. "Study Next" & Practice Suite',
+      route: '/coach',
+      title: '6. AI Study Coach (RAG Grounded)',
       description:
-        'Topics ranked by marginal SGPA gain per study hour. Plus auto-generated study plans, flashcards with SM-2 spaced repetition, and practice tests.',
+        'Server-side Gemini AI coach with zero client API keys. Explains difficult concepts, builds emergency crash plans, and cites exact AKTU PYQ question sources.',
     },
   ];
 

@@ -5,10 +5,8 @@
   "description": "StudyTrack — AKTU student SGPA predictor powered by PYQ analysis and AI coaching",
   "scripts": {
     "dev": "pnpm --filter @studytrack/web dev",
-    "dev:ext": "pnpm --filter @studytrack/extension dev",
     "build": "pnpm -r build",
     "build:web": "pnpm --filter @studytrack/web build",
-    "build:ext": "pnpm --filter @studytrack/extension build",
     "test": "pnpm --filter @studytrack/engine test",
     "test:all": "pnpm -r test",
     "lint": "pnpm -r lint",

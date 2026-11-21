@@ -7,12 +7,12 @@ export function StudyHeatmap() {
   const { userStats } = useStore();
   const dailyMap = userStats.dailyStudyMap;
 
-  // Generate last 16 weeks (112 days)
-  const weeks = 16;
+  // Generate last 14 weeks (98 days) for optimal responsive width
+  const weeks = 14;
   const daysTotal = weeks * 7;
   const days: Array<{ dateStr: string; minutes: number; level: number }> = [];
 
-  const today = new Date('2024-10-27'); // anchor to demo timeline
+  const today = new Date('2024-10-27');
   for (let i = daysTotal - 1; i >= 0; i--) {
     const d = new Date(today);
     d.setDate(d.getDate() - i);
@@ -28,57 +28,56 @@ export function StudyHeatmap() {
     days.push({ dateStr, minutes, level });
   }
 
-  // Level color classes
   const levelClasses: Record<number, string> = {
-    0: 'bg-slate-100 dark:bg-slate-800/80',
-    1: 'bg-indigo-200 dark:bg-indigo-950',
-    2: 'bg-indigo-300 dark:bg-indigo-800',
-    3: 'bg-indigo-500 dark:bg-indigo-600',
-    4: 'bg-indigo-700 dark:bg-indigo-400',
+    0: 'bg-white/5 border border-white/5',
+    1: 'bg-indigo-950/80 border border-indigo-800/40',
+    2: 'bg-indigo-800/90 border border-indigo-700/50',
+    3: 'bg-indigo-600 border border-indigo-500/60',
+    4: 'bg-indigo-400 border border-indigo-300',
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
+    <div className="glass-panel rounded-2xl p-4 sm:p-5 w-full max-w-full overflow-hidden">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
         <div>
-          <h3 className="text-sm font-bold text-slate-900 dark:text-white">
-            Study Activity (Extension Telemetry)
+          <h3 className="text-xs sm:text-sm font-bold text-white">
+            Daily Study Telemetry Heatmap
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Recorded passively via StudyTrack Chrome Extension & YouTube tracking.
+          <p className="text-[11px] text-slate-400">
+            Recorded via in-app Pomodoro sessions, lecture player, and quick logs.
           </p>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-slate-500">
+        <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
           <span>Less</span>
           {[0, 1, 2, 3, 4].map((lvl) => (
-            <div key={lvl} className={`w-3 h-3 rounded-sm ${levelClasses[lvl]}`} />
+            <div key={lvl} className={`w-2.5 h-2.5 rounded-sm ${levelClasses[lvl]}`} />
           ))}
           <span>More</span>
         </div>
       </div>
 
-      {/* Grid container */}
-      <div className="overflow-x-auto pb-2">
-        <div className="grid grid-flow-col grid-rows-7 gap-1.5 w-max">
+      {/* Grid container with strict responsive bounds */}
+      <div className="w-full max-w-full overflow-x-auto pb-1">
+        <div className="grid grid-flow-col grid-rows-7 gap-1 sm:gap-1.5 min-w-[320px] max-w-full">
           {days.map((day) => (
             <div
               key={day.dateStr}
-              className={`w-3.5 h-3.5 rounded-sm transition-transform hover:scale-125 cursor-pointer ${levelClasses[day.level]}`}
+              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-sm transition-transform hover:scale-125 cursor-pointer ${levelClasses[day.level]}`}
               title={`${day.dateStr}: ${day.minutes} min studied`}
             />
           ))}
         </div>
       </div>
 
-      <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
+      <div className="mt-3 pt-2.5 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-400">
         <div>
-          Current Streak: <strong className="text-indigo-600 dark:text-indigo-400 font-bold">{userStats.currentStreak} days</strong>
+          Current Streak: <strong className="text-orange-400 font-bold">{userStats.currentStreak} days</strong>
         </div>
         <div>
-          Longest Streak: <strong className="text-slate-700 dark:text-slate-300 font-bold">{userStats.longestStreak} days</strong>
+          Longest: <strong className="text-white font-bold">{userStats.longestStreak} days</strong>
         </div>
         <div>
-          Total Hours: <strong className="text-slate-700 dark:text-slate-300 font-bold">{(userStats.totalStudyMinutes / 60).toFixed(1)} hrs</strong>
+          Total Time: <strong className="text-indigo-400 font-bold">{(userStats.totalStudyMinutes / 60).toFixed(1)} hrs</strong>
         </div>
       </div>
     </div>

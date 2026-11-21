@@ -2,7 +2,7 @@
 // Pre-seeded ~4 weeks of realistic study progress for the demo user.
 // Roughly 60% of topics covered, with varying confidence levels.
 
-import type { SubjectProgress, StudySession, TestResult, UserStats, Flashcard, Bookmark } from '../schemas';
+import type { SubjectProgress, StudySession, TestResult, UserStats, Flashcard, Bookmark, TodoTask } from '../schemas';
 
 // ─── Subject Progress ───
 export const demoProgress: SubjectProgress[] = [
@@ -235,4 +235,18 @@ export const demoBookmarks: Bookmark[] = [
   { id: 'bk-1', userId: 'demo-user-001', url: 'https://www.youtube.com/watch?v=jkl012', title: 'Binary Search Tree - Abdul Bari', subjectId: 'ds', topicId: 'ds-t14', notes: 'Great explanation of BST operations', timestamp: 324, createdAt: '2024-10-15T10:30:00Z', tags: ['bst', 'tree'] },
   { id: 'bk-2', userId: 'demo-user-001', url: 'https://www.geeksforgeeks.org/avl-tree-set-1-insertion/', title: 'AVL Tree Insertion - GFG', subjectId: 'ds', topicId: 'ds-t15', createdAt: '2024-10-18T09:00:00Z', tags: ['avl', 'tree'] },
   { id: 'bk-3', userId: 'demo-user-001', url: 'https://www.youtube.com/watch?v=def456', title: 'OOP Concepts - CodeWithHarry', subjectId: 'oop', notes: 'Hindi explanation, very clear', timestamp: 180, createdAt: '2024-10-02T15:00:00Z', tags: ['oop', 'basics'] },
+];
+
+// ─── To-Do Tasks ───
+export const demoTodoTasks: TodoTask[] = [
+  { id: 'todo-1', title: 'Solve BST Insertion & Inorder Traversal Numerical (AKTU 2024 Q3)', subjectId: 'ds', topicId: 'ds-t14', priority: 'critical', dueDate: '2024-10-25', completed: true, completedAt: '2024-10-25T14:30:00Z', estimatedMinutes: 45, order: 0 },
+  { id: 'todo-2', title: 'Convert Infix to Postfix Step-by-Step with Stack Table', subjectId: 'ds', topicId: 'ds-t6', priority: 'critical', dueDate: '2024-10-26', completed: true, completedAt: '2024-10-26T16:00:00Z', estimatedMinutes: 30, order: 1 },
+  { id: 'todo-3', title: 'Implement C++ Diamond Problem using Virtual Base Class', subjectId: 'oop', topicId: 'oop-t5', priority: 'critical', dueDate: '2024-10-27', completed: true, completedAt: '2024-10-27T11:20:00Z', estimatedMinutes: 40, order: 2 },
+  { id: 'todo-4', title: 'Study Direct vs Set-Associative Cache Mapping (COA Unit 3)', subjectId: 'coa', topicId: 'coa-t10', priority: 'critical', dueDate: '2024-10-28', completed: false, estimatedMinutes: 60, order: 3 },
+  { id: 'todo-5', title: 'Derive Recurrence Relations Characteristic Equation (DM Unit 2)', subjectId: 'dm', topicId: 'dm-t7', priority: 'critical', dueDate: '2024-10-29', completed: false, estimatedMinutes: 50, order: 4 },
+  { id: 'todo-6', title: 'Review Quick Sort Best/Worst Partitioning Cases', subjectId: 'ds', topicId: 'ds-t19', priority: 'important', dueDate: '2024-10-30', completed: false, estimatedMinutes: 35, order: 5 },
+  { id: 'todo-7', title: 'Read Hardwired vs Microprogrammed Control Unit Comparison', subjectId: 'coa', topicId: 'coa-t8', priority: 'important', dueDate: '2024-10-31', completed: false, estimatedMinutes: 45, order: 6 },
+  { id: 'todo-8', title: 'Practice 5 Euler & Hamiltonian Graph Circuit Proofs', subjectId: 'dm', topicId: 'dm-t10', priority: 'important', dueDate: '2024-11-01', completed: false, estimatedMinutes: 40, order: 7 },
+  { id: 'todo-9', title: 'Draft IEEE Technical Report Abstract for Assignment', subjectId: 'tc', topicId: 'tc-t3', priority: 'optional', dueDate: '2024-11-02', completed: false, estimatedMinutes: 30, order: 8 },
+  { id: 'todo-10', title: 'Complete 20-min Spaced Repetition Flashcards Review', subjectId: 'ds', topicId: 'ds-t5', priority: 'important', dueDate: '2024-11-03', completed: false, estimatedMinutes: 20, order: 9 },
 ];

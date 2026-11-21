@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { X, CheckCircle2, AlertTriangle, Zap, Target, BookOpen } from 'lucide-react';
+import Link from 'next/link';
+import { X, CheckCircle2, AlertTriangle, Zap, Target, BookOpen, Calendar, ArrowRight } from 'lucide-react';
 import { useStore, type JudgeScenario } from '../context/StoreContext';
 import { useI18n } from '../context/I18nContext';
 
@@ -84,18 +85,36 @@ export function JudgeModeModal() {
           </button>
         </div>
 
-        {/* Current Predicted Live Metric Banner */}
-        <div className="px-6 py-2.5 bg-indigo-50/70 dark:bg-indigo-950/40 border-b border-indigo-100 dark:border-indigo-900/40 flex items-center justify-between text-xs">
-          <span className="text-slate-600 dark:text-slate-400">
-            Currently Active Scenario Predicted SGPA:
-          </span>
-          <span className="text-sm font-extrabold text-indigo-600 dark:text-indigo-400">
-            {prediction.sgpa.toFixed(2)} SGPA
-          </span>
+        {/* Current Predicted Live Metric Banner & Hero Shortcuts */}
+        <div className="px-6 py-3 bg-indigo-50/70 dark:bg-indigo-950/40 border-b border-indigo-100 dark:border-indigo-900/40 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div className="flex items-center gap-2">
+            <span className="text-slate-600 dark:text-slate-400">Active Scenario Predicted SGPA:</span>
+            <span className="text-sm font-black text-indigo-600 dark:text-indigo-400">
+              {prediction.sgpa.toFixed(2)} SGPA
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Link
+              href="/predictor"
+              onClick={closeJudgeModal}
+              className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
+            >
+              Mode B Estimator <ArrowRight className="w-3 h-3" />
+            </Link>
+            <span className="text-slate-300 dark:text-slate-700">•</span>
+            <Link
+              href="/plan"
+              onClick={closeJudgeModal}
+              className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
+            >
+              Study Calendar <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
         </div>
 
         {/* Scenarios List */}
-        <div className="p-6 space-y-3 max-h-[60vh] overflow-y-auto">
+        <div className="p-6 space-y-3 max-h-[55vh] overflow-y-auto">
           {scenarios.map((sc) => {
             const Icon = sc.icon;
             const isSelected = activeScenario === sc.id;
@@ -149,9 +168,9 @@ export function JudgeModeModal() {
         <div className="px-6 py-3 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-200 dark:border-slate-800 flex justify-end">
           <button
             onClick={closeJudgeModal}
-            className="px-4 py-1.5 text-xs font-semibold rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
+            className="px-4 py-2 text-xs font-bold rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-300 transition-colors"
           >
-            Done
+            Close
           </button>
         </div>
       </div>

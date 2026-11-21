@@ -29,3 +29,11 @@ build/
 .next/
 *.zip
 !website/downloads/*.zip
+
+# Temporary scripts & docs
+generate_all_diagrams.py
+generated_media/
+inspect_doc.py
+study_pilot_formatted-2.docx
+verify_report.py
+

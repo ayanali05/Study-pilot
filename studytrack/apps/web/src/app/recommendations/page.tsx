@@ -10,7 +10,7 @@ export default function RecommendationsPage() {
   const { recommendations, toggleTopicCovered } = useStore();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full max-w-full overflow-x-hidden">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>

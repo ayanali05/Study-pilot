@@ -10,5 +10,6 @@ export {
   demoUserStats,
   demoFlashcards,
   demoBookmarks,
+  demoTodoTasks,
 } from './seed/demo-progress';
 export { createDataService, getDataService, type DataService } from './data-service';

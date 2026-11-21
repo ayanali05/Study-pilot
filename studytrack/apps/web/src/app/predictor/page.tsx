@@ -13,6 +13,8 @@ import {
   Zap,
   Sliders,
   HelpCircle,
+  ShieldCheck,
+  Cpu,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -21,25 +23,28 @@ export default function PredictorPage() {
   const [activeTab, setActiveTab] = useState<'montecarlo' | 'calculation' | 'sensitivity'>('montecarlo');
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full max-w-full overflow-x-hidden">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+              Hero Feature
+            </span>
             <h1 className="text-xl font-bold text-slate-900 dark:text-white">
-              AKTU SGPA Predictor Engine (Hero Feature)
+              Mode B: Progress-Based Academic Estimator
             </h1>
             <SampleDataBadge />
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Driven by actual topics covered + 5-year PYQ repeat probability + test accuracy.
+            Calculates dynamic SGPA by synthesizing <strong>actual syllabus covered</strong> + <strong>5-year AKTU PYQ repeat weights</strong> + <strong>10,000 Monte Carlo runs</strong>.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <Link
             href="/what-if"
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition-colors shrink-0"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>Launch What-If Simulator</span>
@@ -48,25 +53,31 @@ export default function PredictorPage() {
       </div>
 
       {/* Hero Prediction Display Banner */}
-      <div className="p-6 rounded-3xl bg-gradient-to-br from-indigo-900 via-indigo-800 to-slate-900 text-white shadow-xl shadow-indigo-950/30 relative overflow-hidden">
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
+      <div className="p-6 md:p-8 rounded-3xl bg-gradient-to-br from-indigo-900 via-indigo-800 to-slate-900 text-white shadow-xl shadow-indigo-950/30 relative overflow-hidden">
+        {/* Glow orb background */}
+        <div className="absolute -top-12 -right-12 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-3">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white/20 text-white backdrop-blur-md">
                 Official AKTU Ordinance Model
+              </span>
+              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                <ShieldCheck className="w-3 h-3" /> Mode B Engine Active
               </span>
               <EstimateBadge className="bg-white/10 text-indigo-100 border-white/20" />
             </div>
             <div className="flex items-baseline gap-3">
-              <span className="text-5xl font-black tracking-tight">
+              <span className="text-5xl md:text-6xl font-black tracking-tight text-white drop-shadow">
                 {prediction.sgpa.toFixed(2)}
               </span>
               <span className="text-lg text-indigo-200 font-medium">/ 10.0 SGPA</span>
             </div>
-            <p className="text-xs text-indigo-200/90 max-w-lg">
-              Estimated Semester 3 performance across {prediction.totalCredits} credits.
-              Simulation predicts 80% confidence interval of{' '}
-              <strong className="text-white">
+            <p className="text-xs md:text-sm text-indigo-200/90 max-w-xl leading-relaxed">
+              Estimated performance across {prediction.totalCredits} credits.
+              10,000 Monte Carlo runs confirm an 80% confidence interval of{' '}
+              <strong className="text-white font-black underline decoration-indigo-400">
                 {monteCarlo.percentile10.toFixed(2)} – {monteCarlo.percentile90.toFixed(2)}
               </strong>.
             </p>
@@ -74,15 +85,15 @@ export default function PredictorPage() {
 
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-2 gap-3 shrink-0">
-            <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
-              <div className="text-[11px] text-indigo-200">Expected Grade</div>
-              <div className="text-xl font-bold text-white mt-0.5">
+            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
+              <div className="text-[11px] text-indigo-200 font-medium">Expected Grade</div>
+              <div className="text-xl font-bold text-white mt-1">
                 {prediction.sgpa >= 9.0 ? 'O (Outstanding)' : prediction.sgpa >= 8.0 ? 'A+ (Excellent)' : prediction.sgpa >= 7.0 ? 'A (Very Good)' : 'B+ (Good)'}
               </div>
             </div>
-            <div className="p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
-              <div className="text-[11px] text-indigo-200">Monte Carlo Median</div>
-              <div className="text-xl font-bold text-white mt-0.5">
+            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
+              <div className="text-[11px] text-indigo-200 font-medium">Monte Carlo Median</div>
+              <div className="text-xl font-bold text-white mt-1">
                 {monteCarlo.median.toFixed(2)}
               </div>
             </div>
@@ -91,12 +102,12 @@ export default function PredictorPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
         <button
           onClick={() => setActiveTab('montecarlo')}
-          className={`px-4 py-2 text-xs font-bold rounded-xl transition-colors ${
+          className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${
             activeTab === 'montecarlo'
-              ? 'bg-indigo-600 text-white'
+              ? 'bg-indigo-600 text-white shadow-sm'
               : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
@@ -104,9 +115,9 @@ export default function PredictorPage() {
         </button>
         <button
           onClick={() => setActiveTab('calculation')}
-          className={`px-4 py-2 text-xs font-bold rounded-xl transition-colors ${
+          className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${
             activeTab === 'calculation'
-              ? 'bg-indigo-600 text-white'
+              ? 'bg-indigo-600 text-white shadow-sm'
               : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >
@@ -114,9 +125,9 @@ export default function PredictorPage() {
         </button>
         <button
           onClick={() => setActiveTab('sensitivity')}
-          className={`px-4 py-2 text-xs font-bold rounded-xl transition-colors ${
+          className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${
             activeTab === 'sensitivity'
-              ? 'bg-indigo-600 text-white'
+              ? 'bg-indigo-600 text-white shadow-sm'
               : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
           }`}
         >

@@ -10,6 +10,7 @@ import {
   demoUserStats,
   demoFlashcards,
   demoBookmarks,
+  demoTodoTasks,
   DEMO_USER,
   type Syllabus,
   type SubjectProgress,
@@ -19,6 +20,7 @@ import {
   type Flashcard,
   type Bookmark,
   type PYQData,
+  type TodoTask,
 } from '@studytrack/data';
 import {
   analyzePYQ,
@@ -31,7 +33,7 @@ import {
   type StudyRecommendation,
 } from '@studytrack/engine';
 
-export type JudgeScenario = 'default' | 'smart' | 'skipped_critical' | 'panic';
+export type JudgeScenario = 'default' | 'smart' | 'skipped_critical' | 'panic' | 'mode_b' | 'calendar';
 
 interface StoreContextType {
   syllabus: Syllabus;
@@ -42,6 +44,7 @@ interface StoreContextType {
   userStats: UserStats;
   flashcards: Flashcard[];
   bookmarks: Bookmark[];
+  todoTasks: TodoTask[];
   priorities: Map<string, TopicPriorityResult[]>;
   prediction: SGPAPrediction;
   monteCarlo: MonteCarloResult;
@@ -60,10 +63,14 @@ interface StoreContextType {
   toggleTopicCovered: (subjectId: string, topicId: string) => void;
   updateConfidence: (subjectId: string, confidence: number) => void;
   updateInternalMarks: (subjectId: string, marks: number) => void;
+  updateUserStats: (stats: Partial<UserStats>) => void;
   resetDemoData: () => void;
   addSession: (session: StudySession) => void;
   addTestResult: (result: TestResult) => void;
   updateFlashcardReview: (flashcard: Flashcard) => void;
+  addTodoTask: (task: TodoTask) => void;
+  toggleTodoTask: (id: string) => void;
+  deleteTodoTask: (id: string) => void;
   // Tunable PYQ Weights
   pyqWeights: { frequency: number; marks: number; recency: number; gap: number };
   setPyqWeights: (weights: { frequency: number; marks: number; recency: number; gap: number }) => void;
@@ -80,6 +87,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
   const [userStats, setUserStats] = useState<UserStats>(demoUserStats);
   const [flashcards, setFlashcards] = useState<Flashcard[]>(demoFlashcards);
   const [bookmarks, setBookmarks] = useState<Bookmark[]>(demoBookmarks);
+  const [todoTasks, setTodoTasks] = useState<TodoTask[]>(demoTodoTasks);
 
   const [activeScenario, setActiveScenarioState] = useState<JudgeScenario>('default');
   const [isJudgeModalOpen, setIsJudgeModalOpen] = useState(false);
@@ -107,6 +115,9 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
 
       const savedScenario = localStorage.getItem('studytrack_scenario') as JudgeScenario;
       if (savedScenario) setActiveScenarioState(savedScenario);
+
+      const savedTasks = localStorage.getItem('studytrack_tasks');
+      if (savedTasks) setTodoTasks(JSON.parse(savedTasks));
     } catch (e) {
       console.warn('Could not load local state:', e);
     }
@@ -296,18 +307,58 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     [syllabus, priorities, saveProgress],
   );
 
+  const addTodoTask = useCallback((task: TodoTask) => {
+    setTodoTasks((prev) => {
+      const next = [task, ...prev];
+      try { localStorage.setItem('studytrack_tasks', JSON.stringify(next)); } catch {}
+      return next;
+    });
+  }, []);
+
+  const toggleTodoTask = useCallback((id: string) => {
+    setTodoTasks((prev) => {
+      const next = prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t));
+      try { localStorage.setItem('studytrack_tasks', JSON.stringify(next)); } catch {}
+      return next;
+    });
+    // Award XP
+    setUserStats((prev) => {
+      const next = { ...prev, xp: prev.xp + 20 };
+      try { localStorage.setItem('studytrack_stats', JSON.stringify(next)); } catch {}
+      return next;
+    });
+  }, []);
+
+  const deleteTodoTask = useCallback((id: string) => {
+    setTodoTasks((prev) => {
+      const next = prev.filter((t) => t.id !== id);
+      try { localStorage.setItem('studytrack_tasks', JSON.stringify(next)); } catch {}
+      return next;
+    });
+  }, []);
+
+  const updateUserStats = useCallback((updates: Partial<UserStats>) => {
+    setUserStats((prev) => {
+      const next = { ...prev, ...updates };
+      try { localStorage.setItem('studytrack_stats', JSON.stringify(next)); } catch {}
+      return next;
+    });
+  }, []);
+
   // ── Reset Demo ──
   const resetDemoData = useCallback(() => {
     localStorage.removeItem('studytrack_progress');
     localStorage.removeItem('studytrack_stats');
     localStorage.removeItem('studytrack_sessions');
     localStorage.removeItem('studytrack_scenario');
+    localStorage.removeItem('studytrack_tasks');
     setProgress(demoProgress);
     setUserStats(demoUserStats);
     setSessions(demoSessions);
     setTestResults(demoTestResults);
     setFlashcards(demoFlashcards);
     setBookmarks(demoBookmarks);
+    setTodoTasks(demoTodoTasks);
     setActiveScenarioState('default');
   }, []);
 
@@ -334,6 +385,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         userStats,
         flashcards,
         bookmarks,
+        todoTasks,
         priorities,
         prediction,
         monteCarlo,
@@ -355,10 +407,14 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         toggleTopicCovered,
         updateConfidence,
         updateInternalMarks,
+        updateUserStats,
         resetDemoData,
         addSession,
         addTestResult,
         updateFlashcardReview,
+        addTodoTask,
+        toggleTodoTask,
+        deleteTodoTask,
         pyqWeights,
         setPyqWeights,
       }}

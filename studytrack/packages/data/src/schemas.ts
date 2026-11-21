@@ -142,6 +142,20 @@ export const TestResultSchema = z.object({
   aiGenerated: z.boolean().default(false),
 });
 
+// ─── To-Do Tasks ───
+export const TodoTaskSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  subjectId: z.string().min(1),
+  topicId: z.string().optional(),
+  priority: z.enum(['critical', 'important', 'optional']).default('important'),
+  dueDate: z.string(), // YYYY-MM-DD
+  completed: z.boolean().default(false),
+  completedAt: z.string().datetime().optional(),
+  estimatedMinutes: z.number().default(45),
+  order: z.number().default(0),
+});
+
 // ─── Flashcards ───
 export const FlashcardSchema = z.object({
   id: z.string().min(1),
@@ -266,6 +280,7 @@ export type SubjectProgress = z.infer<typeof SubjectProgressSchema>;
 export type StudySession = z.infer<typeof StudySessionSchema>;
 export type TestQuestionResult = z.infer<typeof TestQuestionResultSchema>;
 export type TestResult = z.infer<typeof TestResultSchema>;
+export type TodoTask = z.infer<typeof TodoTaskSchema>;
 export type Flashcard = z.infer<typeof FlashcardSchema>;
 export type Bookmark = z.infer<typeof BookmarkSchema>;
 export type Badge = z.infer<typeof BadgeSchema>;

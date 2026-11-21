@@ -5,14 +5,14 @@
 
 import type {
   Syllabus, SubjectProgress, StudySession, TestResult,
-  UserStats, Flashcard, Bookmark, PYQData,
+  UserStats, Flashcard, Bookmark, PYQData, TodoTask,
 } from './schemas';
 import { featureFlags, DEMO_USER } from './config';
 import { syllabusData } from './seed/syllabus';
 import { pyqDataSets } from './seed/pyq-data';
 import {
   demoProgress, demoSessions, demoTestResults,
-  demoUserStats, demoFlashcards, demoBookmarks,
+  demoUserStats, demoFlashcards, demoBookmarks, demoTodoTasks,
 } from './seed/demo-progress';
 
 // ─── Types ───
@@ -32,6 +32,8 @@ export interface DataService {
   updateFlashcard(flashcard: Flashcard): Promise<void>;
   getBookmarks(): Promise<Bookmark[]>;
   addBookmark(bookmark: Bookmark): Promise<void>;
+  getTodoTasks(): Promise<TodoTask[]>;
+  saveTodoTasks(tasks: TodoTask[]): Promise<void>;
   isOnline(): boolean;
   reset(): Promise<void>;
 }
@@ -46,6 +48,7 @@ const STORES = {
   stats: 'stats',
   flashcards: 'flashcards',
   bookmarks: 'bookmarks',
+  tasks: 'tasks',
 } as const;
 
 /**
@@ -270,6 +273,23 @@ export function createDataService(): DataService {
 
     async addBookmark(bookmark: Bookmark): Promise<void> {
       await idbPut(STORES.bookmarks, bookmark);
+    },
+
+    async getTodoTasks(): Promise<TodoTask[]> {
+      try {
+        const stored = await idbGetAll<TodoTask>(STORES.tasks);
+        if (stored.length > 0) return stored;
+      } catch {}
+      return demoTodoTasks;
+    },
+
+    async saveTodoTasks(tasks: TodoTask[]): Promise<void> {
+      try {
+        await idbClear(STORES.tasks);
+        for (const t of tasks) {
+          await idbPut(STORES.tasks, t);
+        }
+      } catch {}
     },
 
     isOnline(): boolean {

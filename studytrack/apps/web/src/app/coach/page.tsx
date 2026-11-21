@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
 import { SampleDataBadge } from '../../components/SampleDataBadge';
-import { Bot, Send, Sparkles, BookOpen, Clock, FileSpreadsheet } from 'lucide-react';
+import { Bot, Send, Sparkles, BookOpen, Clock, FileSpreadsheet, Zap } from 'lucide-react';
 
 interface ChatMessage {
   id: string;
@@ -39,20 +39,21 @@ const RULE_BASED_KNOWLEDGE: Record<string, { answer: string; citations: Array<{ 
 };
 
 export default function CoachPage() {
-  const { prediction } = useStore();
+  const { prediction, recommendations } = useStore();
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'm1',
       role: 'assistant',
       content:
-        'Hello Rahul! I am your StudyTrack AI Coach. Grounded directly in your AKTU Semester 3 syllabus and 5-year PYQ intelligence, I can explain difficult topics simply, build customized crash plans, or tell you why specific topics are ranked Critical.',
+        'Hello! I am your StudyTrack AI Coach. Grounded directly in your AKTU Semester 3 syllabus and 5-year PYQ intelligence, I can explain complex algorithms simply, construct 3-day crash roadmaps, or analyze why high-priority questions will improve your SGPA.',
       aiGenerated: true,
+      citations: [{ label: 'Semester 3 Knowledge Base', type: 'engine' }],
     },
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const sendMessage = (text: string) => {
+  const sendMessage = async (text: string) => {
     if (!text.trim()) return;
 
     const userMsg: ChatMessage = {
@@ -64,6 +65,39 @@ export default function CoachPage() {
     setInput('');
     setLoading(true);
 
+    try {
+      // Server-side route handler with automatic failover and local caching
+      const res = await fetch('/api/gemini', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: text,
+          subject: 'AKTU Computer Science Semester 3',
+          systemPrompt: `You are an expert AKTU university tutor. The student has predicted SGPA of ${prediction.sgpa.toFixed(2)}. Uncovered top priority topics: ${recommendations.slice(0, 3).map((r) => r.topicName).join(', ')}. Keep explanations concise, exam-focused, and cite AKTU question patterns.`,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const assistantMsg: ChatMessage = {
+          id: `asst-${Date.now()}`,
+          role: 'assistant',
+          content: data.text,
+          aiGenerated: true,
+          citations: [
+            { label: data.cached ? 'AKTU Knowledge Base (Cached)' : 'Gemini AI + PYQ Engine', type: 'ai' },
+            { label: 'AKTU 5-Year PYQs', type: 'pyq' },
+          ],
+        };
+        setMessages((prev) => [...prev, assistantMsg]);
+        setLoading(false);
+        return;
+      }
+    } catch {
+      // Fallback silently if offline or route fails
+    }
+
+    // Graceful Rule-Based / Deterministic fallback
     setTimeout(() => {
       const lower = text.toLowerCase();
       let response = RULE_BASED_KNOWLEDGE.critical!;
@@ -83,74 +117,79 @@ export default function CoachPage() {
 
       setMessages((prev) => [...prev, assistantMsg]);
       setLoading(false);
-    }, 600);
+    }, 400);
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="max-w-3xl mx-auto space-y-6 w-full overflow-x-hidden">
       {/* Header */}
       <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-bold text-slate-900 dark:text-white">
-              AI Study Coach (RAG Grounded)
+              AI Study Coach (Server-Side Proxy)
             </h1>
             <SampleDataBadge />
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Grounded in AKTU syllabus + PYQ analysis. Fully graceful offline fallback.
+            Grounded in AKTU syllabus & 5-year PYQ dataset. Zero API keys required from user.
           </p>
+        </div>
+
+        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>Server AI Active</span>
         </div>
       </div>
 
-      {/* Preset Action Buttons */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+      {/* Suggested Quick Prompts */}
+      <div className="flex flex-wrap gap-2">
         <button
-          onClick={() => sendMessage('Make a 3-day crash plan for Semester 3')}
-          className="px-3 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 whitespace-nowrap"
+          onClick={() => sendMessage('Give me a 3-day exam crash plan covering maximum AKTU marks')}
+          className="px-3 py-1.5 text-xs rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 flex items-center gap-1.5 transition-colors"
         >
-          ⚡ 3-Day Crash Plan
+          <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+          <span>3-Day High-Yield Crash Plan</span>
         </button>
         <button
-          onClick={() => sendMessage('Explain Binary Search Tree (BST) for exams')}
-          className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 whitespace-nowrap"
+          onClick={() => sendMessage('Explain Binary Search Tree (BST) exam concepts and PYQ frequency')}
+          className="px-3 py-1.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1.5 transition-colors"
         >
-          📖 Explain BST Simply
+          <BookOpen className="w-3.5 h-3.5 text-slate-500" />
+          <span>Explain BST (5/5 Years in PYQ)</span>
         </button>
         <button
-          onClick={() => sendMessage('Why are certain topics tagged Critical?')}
-          className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 whitespace-nowrap"
+          onClick={() => sendMessage('Why are topics labeled Critical vs Optional?')}
+          className="px-3 py-1.5 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1.5 transition-colors"
         >
-          🎯 Why Tagged Critical?
+          <Zap className="w-3.5 h-3.5 text-amber-500" />
+          <span>Why is a Topic Critical?</span>
         </button>
       </div>
 
-      {/* Chat Messages Window */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm min-h-[380px] max-h-[500px] overflow-y-auto space-y-4">
+      {/* Chat Messages Log */}
+      <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 min-h-[380px] max-h-[500px] overflow-y-auto">
         {messages.map((m) => (
           <div
             key={m.id}
             className={`flex flex-col ${m.role === 'user' ? 'items-end' : 'items-start'}`}
           >
             <div
-              className={`p-4 rounded-2xl text-xs leading-relaxed max-w-xl whitespace-pre-line ${
+              className={`p-4 rounded-2xl max-w-xl text-xs leading-relaxed space-y-2 ${
                 m.role === 'user'
-                  ? 'bg-indigo-600 text-white rounded-br-none shadow-sm'
-                  : 'bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-bl-none'
+                  ? 'bg-indigo-600 text-white rounded-br-none'
+                  : 'bg-slate-100 dark:bg-slate-800/80 text-slate-800 dark:text-slate-200 rounded-bl-none border border-slate-200 dark:border-slate-700'
               }`}
             >
-              {m.content}
+              <div className="whitespace-pre-line">{m.content}</div>
 
-              {/* Citations */}
               {m.citations && m.citations.length > 0 && (
-                <div className="mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-700 flex items-center gap-1.5 flex-wrap">
-                  <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400">
-                    Citations:
-                  </span>
+                <div className="pt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex flex-wrap gap-1.5 items-center">
+                  <span className="text-[10px] text-slate-400">Sources:</span>
                   {m.citations.map((c, i) => (
                     <span
                       key={i}
-                      className="text-[10px] font-medium px-2 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300"
+                      className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 font-mono font-medium"
                     >
                       {c.label}
                     </span>
@@ -158,23 +197,25 @@ export default function CoachPage() {
                 </div>
               )}
             </div>
-
             {m.aiGenerated && (
-              <span className="text-[9px] text-slate-400 mt-1 px-1">
-                AI-Generated response • Grounded in syllabus
+              <span className="text-[10px] text-slate-400 mt-1 pl-1">
+                AI-generated response (AKTU RAG Grounded)
               </span>
             )}
           </div>
         ))}
 
         {loading && (
-          <div className="flex items-center gap-2 text-xs text-slate-400 p-2">
-            <span className="animate-pulse">AI Coach is thinking...</span>
+          <div className="flex items-center gap-2 p-3 rounded-2xl bg-slate-100 dark:bg-slate-800/60 text-xs text-slate-500 w-fit">
+            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" />
+            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce [animation-delay:0.2s]" />
+            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce [animation-delay:0.4s]" />
+            <span>Consulting AKTU Knowledge Engine...</span>
           </div>
         )}
       </div>
 
-      {/* Input Form */}
+      {/* Input Field */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -186,12 +227,13 @@ export default function CoachPage() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask anything about your syllabus, PYQs, or strategy..."
-          className="flex-1 px-4 py-3 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white outline-none focus:border-indigo-500 shadow-sm"
+          placeholder="Ask anything about AKTU syllabus, BST, 3-day plans, or exam patterns..."
+          className="flex-1 px-4 py-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm"
         />
         <button
           type="submit"
-          className="p-3 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-sm"
+          disabled={!input.trim() || loading}
+          className="p-3 rounded-2xl bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-40 transition-colors shadow-md shadow-indigo-500/20"
         >
           <Send className="w-4 h-4" />
         </button>
