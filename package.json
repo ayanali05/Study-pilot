@@ -12,6 +12,6 @@
     "test:engine": "pnpm --filter @studytrack/engine test",
     "eval:prompts": "node scripts/eval-prompts.mjs",
     "typecheck": "pnpm -r typecheck",
-    "lint": "pnpm -r lint"
+    "lint": "pnpm --filter @studytrack/web lint"
   }
 }

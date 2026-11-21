@@ -156,7 +156,7 @@ export default function PYQPage() {
           {/* Slider 4: Gap Signal */}
           <div className="space-y-1.5">
             <div className="flex justify-between font-medium">
-              <span className="text-slate-600 dark:text-slate-400">Gap Signal ("Due"):</span>
+              <span className="text-slate-600 dark:text-slate-400">Gap Signal (&quot;Due&quot;):</span>
               <span className="font-bold text-indigo-600 dark:text-indigo-400">
                 {(pyqWeights.gap * 100).toFixed(0)}%
               </span>
@@ -370,7 +370,7 @@ export default function PYQPage() {
                     </span>
                   </div>
                   <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-serif">
-                    "{q.questionText}"
+                    &ldquo;{q.questionText}&rdquo;
                   </p>
                 </div>
               ))}

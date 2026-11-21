@@ -67,7 +67,7 @@ export function InAppStudyTracker() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [isRunning, mode]);
+  }, [isRunning, mode, pomodoroTargetSeconds]);
 
   const handleStart = () => setIsRunning(true);
   const handlePause = () => setIsRunning(false);

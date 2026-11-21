@@ -16,7 +16,7 @@ export default function RecommendationsPage() {
         <div>
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-bold text-slate-900 dark:text-white">
-              "Study Next" Priority Recommender
+              &ldquo;Study Next&rdquo; Priority Recommender
             </h1>
             <SampleDataBadge />
           </div>

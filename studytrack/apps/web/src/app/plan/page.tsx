@@ -41,7 +41,7 @@ export default function PlanPage() {
       chunks.push(plan.days.slice(i, i + 7));
     }
     return chunks;
-  }, [plan.days]);
+  }, [plan]);
 
   const handleExportICS = () => {
     let icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//StudyTrack//AKTU Exam Plan//EN\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n`;

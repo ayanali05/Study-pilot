@@ -45,6 +45,7 @@ export function TopNav() {
           onClick={() => {
             window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }));
           }}
+          aria-label="Search features, topics, and syllabus modules"
           className="floating-pill flex items-center gap-2 px-3.5 py-1.5 text-xs text-slate-300 rounded-2xl hover:text-white"
         >
           <Search className="w-3.5 h-3.5 text-indigo-400" />
@@ -72,6 +73,7 @@ export function TopNav() {
         {/* Judge Mode Switcher with 3D Float */}
         <button
           onClick={openJudgeModal}
+          aria-label="Open Judge Mode to compare student scenarios"
           className={`floating-pill flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-2xl border transition-all ${
             activeScenario !== 'default'
               ? 'floating-pill-active !bg-amber-500 text-white !border-amber-300 shadow-[0_8px_25px_rgba(245,158,11,0.5)]'
@@ -91,6 +93,7 @@ export function TopNav() {
         {/* 60s Tour Button */}
         <button
           onClick={openTour}
+          aria-label="Start 60-Second Evaluator Tour"
           className="floating-pill hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-2xl text-slate-300 hover:text-white"
           title="Start 60-Second Evaluator Tour"
         >
@@ -101,6 +104,7 @@ export function TopNav() {
         {/* Language Switcher */}
         <button
           onClick={toggleLang}
+          aria-label="Switch between English and Hinglish language"
           className="floating-pill flex items-center gap-1 px-2.5 py-1.5 text-xs font-bold rounded-2xl text-slate-300 hover:text-white"
           title="Switch English / Hinglish"
         >
@@ -115,6 +119,7 @@ export function TopNav() {
               resetDemoData();
             }
           }}
+          aria-label="Reset Demo to Original Seed Data"
           className="floating-pill p-2 text-slate-400 hover:text-rose-400 rounded-2xl"
           title="Reset Demo to Original Seed"
         >

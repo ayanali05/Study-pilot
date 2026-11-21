@@ -75,7 +75,7 @@ export function Sidebar() {
         </div>
 
         {/* Navigation items with 3D Floating Tab Depth */}
-        <nav className="flex-1 p-3 space-y-1.5 overflow-y-auto floating-tab-container">
+        <nav aria-label="Main Navigation" className="flex-1 p-3 space-y-1.5 overflow-y-auto floating-tab-container">
           <div className="px-3 py-1 text-[10px] font-bold tracking-wider text-slate-400 uppercase">
             Hero Engines
           </div>
@@ -182,7 +182,7 @@ export function Sidebar() {
       </aside>
 
       {/* Mobile Floating Bottom Dock */}
-      <nav className="lg:hidden fixed bottom-3 left-3 right-3 z-50 glass-panel rounded-3xl p-1.5 flex items-center justify-around shadow-[0_15px_35px_rgba(0,0,0,0.8)] border border-white/20 backdrop-blur-2xl">
+      <nav aria-label="Mobile Navigation Dock" className="lg:hidden fixed bottom-3 left-3 right-3 z-50 glass-panel rounded-3xl p-1.5 flex items-center justify-around shadow-[0_15px_35px_rgba(0,0,0,0.8)] border border-white/20 backdrop-blur-2xl">
         {[
           { href: '/', label: 'Home', icon: LayoutDashboard },
           { href: '/plan', label: 'Plan', icon: CalendarDays },
