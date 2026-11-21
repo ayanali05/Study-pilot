@@ -1,6 +1,4 @@
 {
-  "framework": "nextjs",
-  "installCommand": "npx pnpm@9 --prefix studytrack install",
-  "buildCommand": "npx pnpm@9 --prefix studytrack --filter @studytrack/web build",
+  "buildCommand": "cd studytrack && pnpm install --no-frozen-lockfile && pnpm --filter @studytrack/web build",
   "outputDirectory": "studytrack/apps/web/.next"
 }

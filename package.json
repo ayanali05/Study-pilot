@@ -3,6 +3,6 @@
   "private": true,
   "packageManager": "pnpm@9.15.4",
   "scripts": {
-    "build": "pnpm --prefix studytrack --filter @studytrack/web build"
+    "build": "cd studytrack && pnpm install --no-frozen-lockfile && pnpm --filter @studytrack/web build"
   }
 }
