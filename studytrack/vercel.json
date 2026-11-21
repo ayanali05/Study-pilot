@@ -1,4 +1,4 @@
 {
-  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm --filter @studytrack/web build",
+  "buildCommand": "node ./build-script.js",
   "outputDirectory": "apps/web/.next"
 }
