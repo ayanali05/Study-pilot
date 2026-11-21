@@ -18,6 +18,13 @@ try {
       fs.cpSync(src, studytrackNext, { recursive: true });
       console.log('✅ Mirrored .next to studytrack root');
     }
+
+    // 3. Mirror to monorepo root /.next
+    const rootNext = path.join(__dirname, '..', '..', '..', '.next');
+    if (!fs.existsSync(rootNext)) {
+      fs.cpSync(src, rootNext, { recursive: true });
+      console.log('✅ Mirrored .next to repository root');
+    }
   }
 } catch (e) {
   console.log('Postbuild mirror note:', e.message);
