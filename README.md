@@ -36,8 +36,8 @@ Every semester, over **300,000+ engineering students under AKTU** face a broken 
 ## ✨ 7 Flagship Innovations
 
 ### 1. 📊 Dual-Mode SGPA Predictor Engine
-* **Mode A (Official Ordinance Formula):** Direct implementation of the official AKTU credit-weighted SGPA calculation:
-  $$\text{SGPA} = \frac{\sum_{i=1}^{n} (\text{Credits}_i \times \text{GradePoints}_i)}{\sum_{i=1}^{n} \text{Credits}_i}$$
+* **Mode A (Official Ordinance Formula):** Direct implementation of the official AKTU credit-weighted SGPA calculation
+  
 * **Mode B (Progress & Readiness Predictor):** Algorithmic engine that analyzes real-time syllabus completion, test accuracy scores, and PYQ coverage to forecast the student's expected SGPA band before exams.
 
 ### 2. ⚡ 5-Year PYQ Repeat Intelligence
