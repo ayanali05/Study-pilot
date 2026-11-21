@@ -2,6 +2,7 @@
   "name": "studytrack",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "packageManager": "pnpm@9.15.4",
   "scripts": {
     "dev": "pnpm --filter @studytrack/web dev",

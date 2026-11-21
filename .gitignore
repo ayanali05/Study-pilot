@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
 package-lock.json
+.pnpm-store/
 
 # Python cache
 __pycache__/
@@ -18,22 +19,20 @@ desktop.ini
 *.swp
 *.swo
 
-# Environment & Local Storage
+# Environment & Local Secrets
 .env
 .env.local
+.env.*.local
 *.log
 
-# Build & Archives
+# Build & Output directories
 dist/
 build/
 .next/
+out/
+coverage/
 *.zip
 !website/downloads/*.zip
 
-# Temporary scripts & docs
-generate_all_diagrams.py
+# Temporary media
 generated_media/
-inspect_doc.py
-study_pilot_formatted-2.docx
-verify_report.py
-
