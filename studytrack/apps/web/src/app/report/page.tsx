@@ -45,10 +45,10 @@ export default function ReportPage() {
               AKTU Semester 3 Academic Assessment
             </span>
             <h2 className="text-2xl font-black text-slate-900 dark:text-white mt-1">
-              Rahul Sharma
+              DEEPAK PANDEY
             </h2>
-            <div className="text-xs text-slate-500">
-              B.Tech Computer Science & Engineering • Batch 2025
+            <div className="text-xs text-slate-500 font-medium">
+              B.Tech Computer Science & Engineering • Roll No: 2501660100055 • Batch 2025
             </div>
           </div>
 

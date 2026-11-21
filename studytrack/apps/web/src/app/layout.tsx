@@ -13,6 +13,20 @@ export const metadata: Metadata = {
   title: 'StudyTrack — AKTU SGPA Predictor & PYQ Intelligence',
   description:
     'StudyTrack tells an AKTU student exactly what to study next to raise their SGPA the most, by combining actual syllabus coverage with 5-year PYQ intelligence.',
+  authors: [{ name: 'Deepak Pandey' }],
+  keywords: ['AKTU', 'SGPA Predictor', 'PYQ Intelligence', 'Computer Science', 'Semester 3', 'StudyTrack'],
+  openGraph: {
+    title: 'StudyTrack — AKTU SGPA Predictor & PYQ Intelligence',
+    description: 'Predict AKTU SGPA with actual syllabus coverage + 5-year PYQ repeat intelligence.',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'StudyTrack',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'StudyTrack — AKTU SGPA Predictor & PYQ Intelligence',
+    description: 'Predict AKTU SGPA with actual syllabus coverage + 5-year PYQ repeat intelligence.',
+  },
 };
 
 export default function RootLayout({

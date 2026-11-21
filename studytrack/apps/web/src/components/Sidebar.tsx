@@ -167,11 +167,11 @@ export function Sidebar() {
         <div className="p-3 border-t border-white/10 shrink-0 bg-white/[0.02]">
           <div className="flex items-center gap-3 px-3 py-2 rounded-2xl bg-white/5 border border-white/10 shadow-inner">
             <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-500 to-purple-600 text-white font-bold flex items-center justify-center text-[11px] shadow-sm">
-              RS
+              DP
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-xs font-bold text-white truncate">
-                Rahul Sharma
+                DEEPAK PANDEY
               </div>
               <div className="text-[10px] text-slate-400">
                 CSE Sem 3 • AKTU

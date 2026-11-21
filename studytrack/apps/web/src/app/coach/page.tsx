@@ -45,7 +45,7 @@ export default function CoachPage() {
       id: 'm1',
       role: 'assistant',
       content:
-        'Hello! I am your StudyTrack AI Coach. Grounded directly in your AKTU Semester 3 syllabus and 5-year PYQ intelligence, I can explain complex algorithms simply, construct 3-day crash roadmaps, or analyze why high-priority questions will improve your SGPA.',
+        'Hello DEEPAK! I am your StudyTrack AI Coach. Grounded directly in your AKTU Semester 3 syllabus and 5-year PYQ intelligence, I can explain complex algorithms simply, construct 3-day crash roadmaps, or analyze why high-priority questions will improve your SGPA.',
       aiGenerated: true,
       citations: [{ label: 'Semester 3 Knowledge Base', type: 'engine' }],
     },

@@ -85,7 +85,8 @@ export const EXAM_STRUCTURE = {
 // ─── Demo User ───
 export const DEMO_USER = {
   id: 'demo-user-001',
-  name: 'Rahul Sharma',
+  name: 'DEEPAK PANDEY',
+  rollNo: '2501660100055',
   branch: 'CSE',
   semester: 3,
   university: 'AKTU',

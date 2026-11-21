@@ -7,6 +7,10 @@
     "dev": "pnpm --filter @studytrack/web dev",
     "build": "pnpm --filter @studytrack/web build",
     "start": "pnpm --filter @studytrack/web start",
-    "test": "pnpm --filter @studytrack/engine test"
+    "test": "pnpm --filter @studytrack/engine test && node scripts/eval-prompts.mjs",
+    "test:engine": "pnpm --filter @studytrack/engine test",
+    "eval:prompts": "node scripts/eval-prompts.mjs",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint"
   }
 }

@@ -179,5 +179,5 @@ CREATE INDEX IF NOT EXISTS idx_test_results_user ON test_results(user_id, subjec
 
 -- Seed demo user
 INSERT INTO users (id, name, branch, semester, university, enrollment_year)
-VALUES ('00000000-0000-0000-0000-000000000001', 'Rahul Sharma', 'CSE', 3, 'AKTU', 2025)
+VALUES ('00000000-0000-0000-0000-000000000001', 'DEEPAK PANDEY', 'CSE', 3, 'AKTU', 2025)
 ON CONFLICT DO NOTHING;
